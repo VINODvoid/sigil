@@ -55,9 +55,22 @@ Start with [../README.md](../README.md), then branch based on topic:
 
 ## Current State
 
-- **Status:** Planning / pre-build (as of April 20, 2026)
-- **Time remaining:** 21 days until May 11 deadline (target submit May 9)
-- **Next action:** Day 1 of build plan — register, set up repo, deploy hello world
+- **Status:** Frontend complete — starting Anchor programs (as of April 21, 2026)
+- **Time remaining:** 20 days until May 11 deadline (target submit May 9)
+- **Completed:** All 5 frontend screens (landing, dashboard, sigil detail, registry, agent profile) — all mock data
+- **Next action:** Anchor workspace setup → Credential Program → SDK → wire dashboard to real Solana
+
+### What's done
+- `apps/dashboard/` — full Next.js 15 app, all 5 screens, Framer Motion animations, shadcn UI
+- All data is mocked in `apps/dashboard/app/` components directly (no separate mock module)
+
+### What's next (in order)
+1. `programs/credential/` — Anchor credential program, deploy to devnet
+2. `programs/registry/` — Anchor registry program, deploy to devnet
+3. `packages/sdk/` — TypeScript SDK wrapping both programs
+4. Wire dashboard to real Solana via SDK + Privy wallet
+5. `packages/x402-middleware/` — Express middleware for agent-to-agent calls
+6. Demo agents (Agent A + Agent B) for end-to-end demo video
 
 ---
 

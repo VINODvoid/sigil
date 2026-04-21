@@ -1,0 +1,297 @@
+<svg width="1200" height="260" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldH" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#8B6914"/>
+      <stop offset="40%"  stop-color="#C9A84C"/>
+      <stop offset="60%"  stop-color="#E8C96A"/>
+      <stop offset="100%" stop-color="#8B6914"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#0A0A0B"/>
+      <stop offset="100%" stop-color="#0E0E10"/>
+    </linearGradient>
+    <radialGradient id="glowCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#C9A84C" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rightGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#C9A84C" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="bounds">
+      <rect width="1200" height="260"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes spinReverse {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50%       { opacity: 1; }
+    }
+    @keyframes innerPulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 0.9; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0%   { stop-color: #8B6914; }
+      50%  { stop-color: #E8C96A; }
+      100% { stop-color: #8B6914; }
+    }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.15; }
+      50%       { opacity: 0.4; }
+    }
+
+    .outer-ring {
+      transform-origin: 130px 130px;
+      animation: spin 28s linear infinite;
+    }
+    .mid-ring {
+      transform-origin: 130px 130px;
+      animation: spinReverse 18s linear infinite;
+    }
+    .inner-glow {
+      animation: innerPulse 3s ease-in-out infinite;
+    }
+    .hex-fill {
+      animation: pulse 4s ease-in-out infinite;
+    }
+    .center-s {
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .dot { animation: dotPulse 3s ease-in-out infinite; }
+    .dot-2 { animation: dotPulse 3s ease-in-out 0.5s infinite; }
+    .dot-3 { animation: dotPulse 3s ease-in-out 1s infinite; }
+
+    .title    { animation: fadeUp 0.7s ease-out 0.1s both; }
+    .divider  { animation: fadeIn 0.5s ease-out 0.5s both; }
+    .sub      { animation: fadeUp 0.7s ease-out 0.55s both; }
+    .tagline  { animation: fadeUp 0.7s ease-out 0.8s both; }
+    .tags     { animation: fadeUp 0.7s ease-out 1.05s both; }
+    .stat1    { animation: fadeUp 0.6s ease-out 0.9s both; }
+    .stat2    { animation: fadeUp 0.6s ease-out 1.05s both; }
+    .stat3    { animation: fadeUp 0.6s ease-out 1.2s both; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1200" height="260" fill="url(#bgGrad)" clip-path="url(#bounds)"/>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.035" stroke="#C9A84C" stroke-width="0.5">
+    <line x1="0"    y1="65"  x2="1200" y2="65"/>
+    <line x1="0"    y1="130" x2="1200" y2="130"/>
+    <line x1="0"    y1="195" x2="1200" y2="195"/>
+    <line x1="260"  y1="0"   x2="260"  y2="260"/>
+    <line x1="600"  y1="0"   x2="600"  y2="260"/>
+    <line x1="900"  y1="0"   x2="900"  y2="260"/>
+  </g>
+
+  <!-- Dot grid -->
+  <g class="dot">
+    <circle cx="260" cy="65"  r="1.5" fill="#C9A84C"/>
+    <circle cx="600" cy="65"  r="1.5" fill="#C9A84C"/>
+    <circle cx="900" cy="65"  r="1.5" fill="#C9A84C"/>
+    <circle cx="260" cy="195" r="1.5" fill="#C9A84C"/>
+    <circle cx="600" cy="195" r="1.5" fill="#C9A84C"/>
+    <circle cx="900" cy="195" r="1.5" fill="#C9A84C"/>
+  </g>
+
+  <!-- Radial glow behind logo -->
+  <ellipse cx="130" cy="130" rx="130" ry="110" fill="url(#glowCenter)"/>
+
+  <!-- Outer spinning ring (r=98, pointy-top hexagon) -->
+  <!-- Vertices: (130,32) (214.9,81) (214.9,179) (130,228) (45.1,179) (45.1,81) -->
+  <polygon
+    points="130,32 214.9,81 214.9,179 130,228 45.1,179 45.1,81"
+    fill="none"
+    stroke="#C9A84C"
+    stroke-width="0.8"
+    stroke-opacity="0.25"
+    stroke-dasharray="6 4"
+    class="outer-ring"/>
+
+  <!-- Middle counter-spinning ring (r=82) -->
+  <!-- Vertices: (130,48) (201.0,89.5) (201.0,170.5) (130,212) (59.0,170.5) (59.0,89.5) -->
+  <polygon
+    points="130,48 201,89.5 201,170.5 130,212 59,170.5 59,89.5"
+    fill="none"
+    stroke="#C9A84C"
+    stroke-width="1"
+    stroke-opacity="0.4"
+    class="mid-ring"/>
+
+  <!-- Static inner hex with fill (r=65) -->
+  <!-- Vertices: (130,65) (186.3,97.5) (186.3,162.5) (130,195) (73.7,162.5) (73.7,97.5) -->
+  <polygon
+    points="130,65 186.3,97.5 186.3,162.5 130,195 73.7,162.5 73.7,97.5"
+    fill="rgba(201,168,76,0.04)"
+    stroke="url(#goldH)"
+    stroke-width="1.5"
+    class="hex-fill"
+    filter="url(#glow)"/>
+
+  <!-- Inner glow ellipse -->
+  <ellipse cx="130" cy="130" rx="55" ry="55"
+    fill="rgba(201,168,76,0.05)"
+    class="inner-glow"/>
+
+  <!-- Center S -->
+  <text
+    x="130" y="152"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="58"
+    font-weight="bold"
+    fill="url(#goldH)"
+    class="center-s"
+    filter="url(#glow)">S</text>
+
+  <!-- Vertical separator between logo and text -->
+  <line x1="248" y1="40" x2="248" y2="220"
+    stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+
+  <!-- ─── Right: Text Content ─── -->
+
+  <!-- SIGIL -->
+  <text
+    x="280" y="108"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="76"
+    font-weight="bold"
+    fill="#F0EEE8"
+    letter-spacing="8"
+    class="title">SIGIL</text>
+
+  <!-- Gold accent line under title -->
+  <rect x="280" y="122" width="420" height="1.5" fill="url(#goldH)" rx="1" class="divider"/>
+
+  <!-- Subtitle (tracking) -->
+  <text
+    x="282" y="153"
+    font-family="'Courier New', 'Lucida Console', monospace"
+    font-size="13"
+    fill="#C9A84C"
+    letter-spacing="5"
+    class="sub">IDENTITY · TRUST · DISCOVERY</text>
+
+  <!-- Tagline -->
+  <text
+    x="282" y="185"
+    font-family="'Courier New', 'Lucida Console', monospace"
+    font-size="13.5"
+    fill="rgba(240,238,232,0.45)"
+    class="tagline">The KYA primitive for AI agents transacting on Solana</text>
+
+  <!-- Tech tags -->
+  <g class="tags">
+    <!-- Solana -->
+    <rect x="282" y="208" width="72" height="24" rx="4"
+      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+    <text x="318" y="224" text-anchor="middle"
+      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">Solana</text>
+
+    <!-- Anchor -->
+    <rect x="362" y="208" width="68" height="24" rx="4"
+      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+    <text x="396" y="224" text-anchor="middle"
+      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">Anchor</text>
+
+    <!-- TypeScript -->
+    <rect x="438" y="208" width="86" height="24" rx="4"
+      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+    <text x="481" y="224" text-anchor="middle"
+      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">TypeScript</text>
+
+    <!-- Next.js -->
+    <rect x="532" y="208" width="66" height="24" rx="4"
+      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+    <text x="565" y="224" text-anchor="middle"
+      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">Next.js</text>
+
+    <!-- x402 -->
+    <rect x="606" y="208" width="52" height="24" rx="4"
+      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.35)" stroke-width="1"/>
+    <text x="632" y="224" text-anchor="middle"
+      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">x402</text>
+  </g>
+
+  <!-- ─── Right side stats panel ─── -->
+  <g>
+    <!-- Panel background -->
+    <rect x="940" y="50" width="220" height="160" rx="8"
+      fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+
+    <!-- Stat 1 -->
+    <g class="stat1">
+      <text x="960" y="95"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-weight="bold"
+        fill="#C9A84C">340K+</text>
+      <text x="960" y="113"
+        font-family="'Courier New', monospace"
+        font-size="10" fill="rgba(240,238,232,0.4)"
+        letter-spacing="1">AGENT WALLETS ON-CHAIN</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="960" y1="124" x2="1140" y2="124"
+      stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+
+    <!-- Stat 2 -->
+    <g class="stat2">
+      <text x="960" y="155"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="30" font-weight="bold"
+        fill="#C9A84C">$0</text>
+      <text x="960" y="173"
+        font-family="'Courier New', monospace"
+        font-size="10" fill="rgba(240,238,232,0.4)"
+        letter-spacing="1">KYA SOLUTIONS SHIPPED</text>
+    </g>
+
+    <!-- Divider -->
+    <line x1="960" y1="184" x2="1140" y2="184"
+      stroke="rgba(201,168,76,0.12)" stroke-width="1"/>
+
+    <!-- Stat 3 -->
+    <g class="stat3">
+      <text x="960" y="205"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="14" font-weight="bold"
+        fill="rgba(240,238,232,0.7)">Colosseum Frontier 2026</text>
+    </g>
+  </g>
+
+  <!-- Right ambient glow -->
+  <ellipse cx="1100" cy="130" rx="160" ry="100" fill="url(#rightGlow)"/>
+</svg>
