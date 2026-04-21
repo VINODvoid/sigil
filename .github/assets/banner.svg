@@ -1,37 +1,7 @@
 <svg width="1200" height="260" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="goldH" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#8B6914"/>
-      <stop offset="40%"  stop-color="#C9A84C"/>
-      <stop offset="60%"  stop-color="#E8C96A"/>
-      <stop offset="100%" stop-color="#8B6914"/>
-    </linearGradient>
-    <linearGradient id="goldV" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#E8C96A"/>
-      <stop offset="50%"  stop-color="#C9A84C"/>
-      <stop offset="100%" stop-color="#8B6914"/>
-    </linearGradient>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#0A0A0B"/>
-      <stop offset="100%" stop-color="#0E0E10"/>
-    </linearGradient>
-    <radialGradient id="logoGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#C9A84C" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rightGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#C9A84C" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
-    </radialGradient>
     <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -43,21 +13,10 @@
   </defs>
 
   <style>
-    @keyframes spinCW {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    @keyframes spinCCW {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(-360deg); }
-    }
     @keyframes pulse {
-      0%, 100% { opacity: 0.55; }
-      50%       { opacity: 1; }
-    }
-    @keyframes logoPulse {
-      0%, 100% { opacity: 0.85; }
-      50%       { opacity: 1; }
+      0%, 100% { opacity: 0.28; }
+      12.5% { opacity: 1; }
+      25% { opacity: 0.28; }
     }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
@@ -67,47 +26,21 @@
       from { opacity: 0; }
       to   { opacity: 1; }
     }
-    @keyframes dotBlink {
-      0%, 100% { opacity: 0.12; }
-      50%       { opacity: 0.35; }
+    .spoke {
+      animation: pulse 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    .ring-outer {
-      transform-origin: 124px 130px;
-      animation: spinCW 30s linear infinite;
-    }
-    .ring-mid {
-      transform-origin: 124px 130px;
-      animation: spinCCW 20s linear infinite;
-    }
-    .ring-inner {
-      animation: pulse 3.5s ease-in-out infinite;
-    }
-    .logo-glow {
-      animation: pulse 3.5s ease-in-out infinite;
-    }
-    .logo-mark {
-      animation: logoPulse 3.5s ease-in-out infinite;
-    }
-
     .title   { animation: fadeUp 0.7s ease-out 0.1s both; }
     .divider { animation: fadeIn 0.5s ease-out 0.45s both; }
     .sub     { animation: fadeUp 0.7s ease-out 0.5s both; }
     .tagline { animation: fadeUp 0.7s ease-out 0.75s both; }
     .tags    { animation: fadeUp 0.7s ease-out 1.0s both; }
-    .stat1   { animation: fadeUp 0.6s ease-out 0.85s both; }
-    .stat2   { animation: fadeUp 0.6s ease-out 1.0s both; }
-    .stat3   { animation: fadeUp 0.6s ease-out 1.15s both; }
-    .dot     { animation: dotBlink 3s ease-in-out infinite; }
-    .dot2    { animation: dotBlink 3s ease-in-out 0.6s infinite; }
-    .dot3    { animation: dotBlink 3s ease-in-out 1.2s infinite; }
   </style>
 
   <!-- Background -->
-  <rect width="1200" height="260" fill="url(#bgGrad)" clip-path="url(#bounds)"/>
+  <rect width="1200" height="260" fill="#ffffff" clip-path="url(#bounds)"/>
 
   <!-- Subtle grid -->
-  <g stroke="#C9A84C" stroke-width="0.5" opacity="0.04">
+  <g stroke="#000000" stroke-width="0.5" opacity="0.05">
     <line x1="0"   y1="65"  x2="1200" y2="65"/>
     <line x1="0"   y1="130" x2="1200" y2="130"/>
     <line x1="0"   y1="195" x2="1200" y2="195"/>
@@ -116,175 +49,89 @@
     <line x1="900" y1="0"   x2="900"  y2="260"/>
   </g>
 
-  <!-- Grid intersection dots -->
-  <g fill="#C9A84C">
-    <circle cx="248" cy="65"  r="1.5" class="dot"/>
-    <circle cx="600" cy="65"  r="1.5" class="dot2"/>
-    <circle cx="900" cy="65"  r="1.5" class="dot3"/>
-    <circle cx="248" cy="195" r="1.5" class="dot2"/>
-    <circle cx="600" cy="195" r="1.5" class="dot3"/>
-    <circle cx="900" cy="195" r="1.5" class="dot"/>
-  </g>
-
   <!-- ─── Logo Area (0–248px) ─── -->
 
-  <!-- Radial glow behind logo -->
-  <ellipse cx="124" cy="130" rx="115" ry="100" fill="url(#logoGlow)" class="logo-glow"/>
-
-  <!-- Outer spinning dashed ring -->
-  <circle cx="124" cy="130" r="108"
-    fill="none"
-    stroke="#C9A84C"
-    stroke-width="0.75"
-    stroke-opacity="0.22"
-    stroke-dasharray="5 6"
-    class="ring-outer"/>
-
-  <!-- Middle counter-spinning ring -->
-  <circle cx="124" cy="130" r="90"
-    fill="none"
-    stroke="#C9A84C"
-    stroke-width="1"
-    stroke-opacity="0.35"
-    stroke-dasharray="2 8"
-    class="ring-mid"/>
-
-  <!-- Inner static ring, pulsing -->
+  <!-- Inner static ring -->
   <circle cx="124" cy="130" r="72"
-    fill="rgba(201,168,76,0.04)"
-    stroke="#C9A84C"
-    stroke-width="1.2"
-    stroke-opacity="0.5"
-    class="ring-inner"
-    filter="url(#glow)"/>
+    fill="none"
+    stroke="#000000"
+    stroke-width="1"
+    stroke-opacity="0.1"/>
 
   <!-- ─── Actual Sigil Logo Mark ─── -->
-  <!-- Original viewBox: 0 0 48 48, centered ~(22, 24) -->
-  <!-- Scale 3.5x → 168px; center at (124, 130): translate(124 - 22*3.5, 130 - 24*3.5) = (47, 46) -->
-  <g transform="translate(47, 46) scale(3.5)" class="logo-mark" filter="url(#glow)">
+  <g transform="translate(47, 46) scale(3.5)">
     <g transform="translate(4, 0)">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M18.5 19V4L21.5 4V19H18.5Z"
-        fill="#C9A84C"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M22.4754 19.404L33.082 8.79736L35.2034 10.9187L26.7181 19.404L22.4754 19.404Z"
-        fill="#C9A84C"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M18.5 22.5L40 22.5V25.5L18.5 25.5V22.5Z"
-        fill="#C9A84C"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M26.7178 28.5963L35.2031 37.0815L33.0818 39.2029L22.4752 28.5963H26.7178Z"
-        fill="#C9A84C"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M18.5 44V29H21.5V44H18.5Z"
-        fill="#C9A84C"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M4.79776 37.0816L15.4044 26.475L17.5257 28.5964L6.91908 39.203L4.79776 37.0816Z"
-        fill="#C9A84C"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M2.62269e-07 22.5L15 22.5V25.5L0 25.5L2.62269e-07 22.5Z"
-        fill="#C9A84C"/>
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M6.91885 8.79727L17.5255 19.4039L15.4041 21.5252L4.79753 10.9186L6.91885 8.79727Z"
-        fill="#C9A84C"/>
+      <path class="spoke" style="animation-delay: 0s;" fill-rule="evenodd" clip-rule="evenodd" d="M18.5 19V4L21.5 4V19H18.5Z" fill="#000000"/>
+      <path class="spoke" style="animation-delay: 0.5s;" fill-rule="evenodd" clip-rule="evenodd" d="M22.4754 19.404L33.082 8.79736L35.2034 10.9187L26.7181 19.404L22.4754 19.404Z" fill="#000000"/>
+      <path class="spoke" style="animation-delay: 1s;" fill-rule="evenodd" clip-rule="evenodd" d="M18.5 22.5L40 22.5V25.5L18.5 25.5V22.5Z" fill="#000000"/>
+      <path class="spoke" style="animation-delay: 1.5s;" fill-rule="evenodd" clip-rule="evenodd" d="M26.7178 28.5963L35.2031 37.0815L33.0818 39.2029L22.4752 28.5963H26.7178Z" fill="#000000"/>
+      <path class="spoke" style="animation-delay: 2s;" fill-rule="evenodd" clip-rule="evenodd" d="M18.5 44V29H21.5V44H18.5Z" fill="#000000"/>
+      <path class="spoke" style="animation-delay: 2.5s;" fill-rule="evenodd" clip-rule="evenodd" d="M4.79776 37.0816L15.4044 26.475L17.5257 28.5964L6.91908 39.203L4.79776 37.0816Z" fill="#000000"/>
+      <path class="spoke" style="animation-delay: 3s;" fill-rule="evenodd" clip-rule="evenodd" d="M2.62269e-07 22.5L15 22.5V25.5L0 25.5L2.62269e-07 22.5Z" fill="#000000"/>
+      <path class="spoke" style="animation-delay: 3.5s;" fill-rule="evenodd" clip-rule="evenodd" d="M6.91885 8.79727L17.5255 19.4039L15.4041 21.5252L4.79753 10.9186L6.91885 8.79727Z" fill="#000000"/>
     </g>
   </g>
 
   <!-- Separator line -->
   <line x1="248" y1="36" x2="248" y2="224"
-    stroke="rgba(201,168,76,0.14)" stroke-width="1"/>
+    stroke="#000000" stroke-width="1" stroke-opacity="0.1"/>
 
-  <!-- ─── Text Content (x > 260) ─── -->
+  <!-- ─── Text Content ─── -->
 
   <!-- SIGIL wordmark -->
   <text x="278" y="108"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="78"
     font-weight="bold"
-    fill="#F0EEE8"
+    fill="#000000"
     letter-spacing="10"
     class="title">SIGIL</text>
 
-  <!-- Gold underline -->
-  <rect x="278" y="122" width="430" height="1.5" fill="url(#goldH)" rx="1" class="divider"/>
+  <!-- Underline -->
+  <rect x="278" y="122" width="430" height="1.5" fill="#000000" fill-opacity="0.1" rx="1" class="divider"/>
 
   <!-- Subtitle -->
   <text x="280" y="152"
-    font-family="'Courier New', 'Lucida Console', monospace"
+    font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
     font-size="12.5"
-    fill="#C9A84C"
+    fill="#000000"
+    fill-opacity="0.6"
     letter-spacing="5.5"
     class="sub">IDENTITY · TRUST · DISCOVERY</text>
 
   <!-- Tagline -->
   <text x="280" y="184"
-    font-family="'Courier New', 'Lucida Console', monospace"
+    font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif"
     font-size="13.5"
-    fill="rgba(240,238,232,0.42)"
+    fill="#000000"
+    fill-opacity="0.4"
     class="tagline">The KYA primitive for AI agents transacting on Solana</text>
 
   <!-- Tech tags -->
   <g class="tags">
     <rect x="280" y="208" width="72" height="24" rx="4"
-      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.32)" stroke-width="1"/>
+      fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
     <text x="316" y="224" text-anchor="middle"
-      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">Solana</text>
+      font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" fill="#18181b">Solana</text>
 
     <rect x="360" y="208" width="68" height="24" rx="4"
-      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.32)" stroke-width="1"/>
+      fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
     <text x="394" y="224" text-anchor="middle"
-      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">Anchor</text>
+      font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" fill="#18181b">Anchor</text>
 
     <rect x="436" y="208" width="86" height="24" rx="4"
-      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.32)" stroke-width="1"/>
+      fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
     <text x="479" y="224" text-anchor="middle"
-      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">TypeScript</text>
+      font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" fill="#18181b">TypeScript</text>
 
     <rect x="530" y="208" width="66" height="24" rx="4"
-      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.32)" stroke-width="1"/>
+      fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
     <text x="563" y="224" text-anchor="middle"
-      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">Next.js</text>
+      font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" fill="#18181b">Next.js</text>
 
     <rect x="604" y="208" width="52" height="24" rx="4"
-      fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.32)" stroke-width="1"/>
+      fill="#f4f4f5" stroke="#e4e4e7" stroke-width="1"/>
     <text x="630" y="224" text-anchor="middle"
-      font-family="'Courier New', monospace" font-size="11" fill="#C9A84C">x402</text>
+      font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="11" fill="#18181b">x402</text>
   </g>
-
-  <!-- ─── Right Stats Panel ─── -->
-  <rect x="940" y="46" width="224" height="168" rx="8"
-    fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-
-  <g class="stat1">
-    <text x="960" y="96"
-      font-family="Georgia, 'Times New Roman', serif"
-      font-size="32" font-weight="bold" fill="#C9A84C">340K+</text>
-    <text x="960" y="114"
-      font-family="'Courier New', monospace"
-      font-size="10" fill="rgba(240,238,232,0.35)" letter-spacing="0.5">AGENT WALLETS ON-CHAIN</text>
-  </g>
-
-  <line x1="960" y1="125" x2="1144" y2="125"
-    stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-
-  <g class="stat2">
-    <text x="960" y="158"
-      font-family="Georgia, 'Times New Roman', serif"
-      font-size="32" font-weight="bold" fill="#C9A84C">$0</text>
-    <text x="960" y="176"
-      font-family="'Courier New', monospace"
-      font-size="10" fill="rgba(240,238,232,0.35)" letter-spacing="0.5">KYA SOLUTIONS SHIPPED</text>
-  </g>
-
-  <line x1="960" y1="187" x2="1144" y2="187"
-    stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
-
-  <g class="stat3">
-    <text x="960" y="208"
-      font-family="'Courier New', monospace"
-      font-size="11" fill="rgba(240,238,232,0.55)">Colosseum Frontier 2026</text>
-  </g>
-
-  <!-- Ambient right glow -->
-  <ellipse cx="1100" cy="130" rx="170" ry="105" fill="url(#rightGlow)"/>
 </svg>

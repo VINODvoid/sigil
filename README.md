@@ -6,12 +6,12 @@
 
 <div align="center">
 
-[![Hackathon](https://img.shields.io/badge/Colosseum%20Frontier-2026-C9A84C?style=flat-square)](https://arena.colosseum.org)
-[![Network](https://img.shields.io/badge/Solana-Devnet-9945FF?style=flat-square&logo=solana&logoColor=white)](https://solana.com)
-[![Anchor](https://img.shields.io/badge/Anchor-latest-ff6b35?style=flat-square)](https://www.anchor-lang.com)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![License](https://img.shields.io/badge/License-MIT-white?style=flat-square)](./LICENSE)
-[![Status](https://img.shields.io/badge/Status-In%20Development-22c55e?style=flat-square)]()
+[![Hackathon](https://img.shields.io/badge/Colosseum%20Frontier-2026-000000?style=flat-square)](https://arena.colosseum.org)
+[![Network](https://img.shields.io/badge/Solana-Devnet-000000?style=flat-square&logo=solana&logoColor=white)](https://solana.com)
+[![Anchor](https://img.shields.io/badge/Anchor-latest-000000?style=flat-square)](https://www.anchor-lang.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-000000?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/License-MIT-000000?style=flat-square)](./LICENSE)
+[![Status](https://img.shields.io/badge/Status-In%20Development-000000?style=flat-square)]()
 
 </div>
 
@@ -224,7 +224,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | Component | Status | Notes |
 |-----------|--------|-------|
 | Landing page | ✅ Complete | Framer Motion animations, scroll reveal |
-| Principal Dashboard | ✅ Complete | Mock data — Solana wiring pending |
+| Principal Dashboard | ✅ Complete | Clean minimalist UI |
 | Registry Explorer | ✅ Complete | Client-side filter + sort |
 | Sigil Detail + Revoke | ✅ Complete | AlertDialog, spend bar animation |
 | Agent Profile + Reputation Chart | ✅ Complete | Recharts AreaChart |
