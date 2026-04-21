@@ -1,7 +1,10 @@
 "use client";
 
+"use client";
+
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { CopyButton } from "@/components/landing/CopyButton";
 
 const integrations = [
   {
@@ -70,11 +73,11 @@ const integrations = [
 
 function highlightCode(code: string) {
   return code
-    .replace(/(\".*?\"|\'.*?\')/g, '<span style="color: #10b981;">$1</span>')
-    .replace(/\/\/.*/g, '<span style="color: #94a3b8; font-style: italic;">$&</span>')
-    .replace(/\b(await|const|async|import|from|new)\b/g, '<span style="color: #6366f1; font-weight: 500;">$1</span>')
-    .replace(/\b(Sigil|issue|verify|find|registry)\b/g, '<span style="color: #8b5cf6;">$1</span>')
-    .replace(/\b(agent|capabilities|spendLimit|capability|rpc|wallet|minReputation)\b/g, '<span style="color: #f59e0b;">$1</span>');
+    .replace(/(\".*?\"|\'.*?\')/g, '<span style="color: #047857;">$1</span>')
+    .replace(/\/\/.*/g, '<span style="color: #6b7280; font-style: italic;">$&</span>')
+    .replace(/\b(await|const|async|import|from|new)\b/g, '<span style="color: #4338ca; font-weight: 500;">$1</span>')
+    .replace(/\b(Sigil|issue|verify|find|registry)\b/g, '<span style="color: #6d28d9;">$1</span>')
+    .replace(/\b(agent|capabilities|spendLimit|capability|rpc|wallet|minReputation)\b/g, '<span style="color: #b45309;">$1</span>');
 }
 
 function IntegrationCard({
@@ -181,14 +184,17 @@ const agents = await sigil.registry.find({ capability: "image-generation", minRe
                 SDK · TypeScript
               </span>
             </div>
-            <span className="font-mono text-[10px] text-muted-foreground/80 bg-background/50 border border-border/50 rounded-full px-3 py-1">
-              @sigil/sdk
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-[10px] text-muted-foreground/80 bg-background/50 border border-border/50 rounded-full px-3 py-1">
+                @sigil/sdk
+              </span>
+              <CopyButton text={sdkCode} />
+            </div>
           </div>
           <div className="font-mono text-[12px] text-foreground/80 leading-relaxed overflow-x-auto">
-            <div 
+            <div
               className="whitespace-pre"
-              dangerouslySetInnerHTML={{ __html: highlightCode(sdkCode) }} 
+              dangerouslySetInnerHTML={{ __html: highlightCode(sdkCode) }}
             />
           </div>
         </motion.div>

@@ -1,7 +1,10 @@
 "use client";
 
+"use client";
+
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { CopyButton } from "@/components/landing/CopyButton";
 
 const steps = [
   {
@@ -65,10 +68,10 @@ function LineReveal({
 
 function highlightCode(code: string) {
   return code
-    .replace(/(\".*?\"|\'.*?\')/g, '<span style="color: #10b981;">$1</span>')
-    .replace(/\/\/.*/g, '<span style="color: #94a3b8; font-style: italic;">$&</span>')
-    .replace(/\b(await|const|async|import|from)\b/g, '<span style="color: #6366f1; font-weight: 500;">$1</span>')
-    .replace(/\b(sigil|issue|verify|use|sigilMiddleware)\b/g, '<span style="color: #8b5cf6;">$1</span>');
+    .replace(/(\".*?\"|\'.*?\')/g, '<span style="color: #047857;">$1</span>')
+    .replace(/\/\/.*/g, '<span style="color: #6b7280; font-style: italic;">$&</span>')
+    .replace(/\b(await|const|async|import|from)\b/g, '<span style="color: #4338ca; font-weight: 500;">$1</span>')
+    .replace(/\b(sigil|issue|verify|use|sigilMiddleware)\b/g, '<span style="color: #6d28d9;">$1</span>');
 }
 
 function StepCard({ step, index }: { step: (typeof steps)[0]; index: number }) {
@@ -106,7 +109,15 @@ function StepCard({ step, index }: { step: (typeof steps)[0]; index: number }) {
 
       {/* Code */}
       <div className="bg-secondary/80 border border-border/50 rounded-xl p-6 group-hover:bg-secondary group-hover:border-border/80 transition-all duration-300 mt-auto">
-        <div 
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex gap-1.5">
+            <div className="w-2 h-2 rounded-full bg-border" />
+            <div className="w-2 h-2 rounded-full bg-border" />
+            <div className="w-2 h-2 rounded-full bg-border" />
+          </div>
+          <CopyButton text={step.code} />
+        </div>
+        <div
           className="text-[11px] font-mono text-foreground/80 leading-relaxed overflow-x-auto whitespace-pre"
           dangerouslySetInnerHTML={{ __html: highlightCode(step.code) }}
         />
