@@ -49,7 +49,6 @@ export function HeroSection() {
     [0, 1],
     shouldReduceMotion ? [0, 0] : [0, -60],
   );
-  const scrollCueOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
   return (
     <section
@@ -69,8 +68,8 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mb-8"
         >
-          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.22em] text-muted-foreground/70 uppercase bg-background/60 backdrop-blur-sm border border-border/40 rounded-full px-4 py-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-foreground/40 animate-pulse" />
+          <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.22em] text-foreground font-medium uppercase bg-foreground/5 backdrop-blur-sm border border-border/40 rounded-full px-4 py-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             AI Agent Infrastructure · Solana
           </span>
         </motion.div>
@@ -88,19 +87,19 @@ export function HeroSection() {
           </LineReveal>
         </h1>
 
-        {/* Sub */}
+        {/* Sub - Improved contrast */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[1.1rem] text-muted-foreground leading-relaxed max-w-[540px] mb-10"
+          className="text-[1.1rem] text-foreground/70 leading-relaxed max-w-[540px] mb-10 font-medium"
         >
           AI agents can now transact autonomously. But without identity,
           authorization, and accountability — anyone claiming to be "your agent"
           could be anyone. Sigil fixes that.
         </motion.p>
 
-        {/* CTAs */}
+        {/* CTAs - Redesigned for maximum theme awareness */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -111,10 +110,10 @@ export function HeroSection() {
             href="/dashboard"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "rounded-full px-10 h-14 text-[15px] font-medium gap-2 group shadow-lg shadow-foreground/5 hover:shadow-foreground/10 transition-all",
+              "rounded-full px-10 h-14 text-[15px] font-medium gap-2 group shadow-lg shadow-foreground/5 hover:shadow-foreground/10 transition-all bg-foreground text-background"
             )}
           >
-            Issue a Sigil
+            Get started
             <ArrowRight
               size={16}
               className="transition-transform group-hover:translate-x-0.5"
@@ -124,21 +123,21 @@ export function HeroSection() {
             href="/registry"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "rounded-full px-10 h-14 text-[15px] font-medium bg-background/60 backdrop-blur-sm hover:bg-background transition-colors",
+              "rounded-full px-10 h-14 text-[15px] font-medium bg-foreground/5 backdrop-blur-sm hover:bg-foreground/10 transition-colors border-border text-foreground"
             )}
           >
             Browse agents
           </Link>
         </motion.div>
 
-        {/* Stats strip */}
+        {/* Stats strip - Consistent with dashboard styling */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
           className="w-full max-w-4xl mx-auto relative z-20 mt-12"
         >
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 px-8 py-6 bg-background/40 backdrop-blur-md rounded-2xl border border-border/20 shadow-sm">
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 px-8 py-6 bg-background/50 backdrop-blur-md rounded-2xl border border-border/40 shadow-sm">
             {[
               { value: "847", label: "Active agents" },
               { value: "12.4k", label: "Verified txns" },
@@ -150,7 +149,7 @@ export function HeroSection() {
                   <div className="font-mono text-[1.25rem] font-medium text-foreground tabular-nums tracking-tight">
                     {stat.value}
                   </div>
-                  <div className="text-[10px] font-mono tracking-widest text-muted-foreground/60 uppercase mt-1">
+                  <div className="text-[10px] font-mono tracking-widest text-foreground/50 font-bold uppercase mt-1">
                     {stat.label}
                   </div>
                 </div>
