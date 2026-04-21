@@ -27,12 +27,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="fixed top-0 left-0 right-0 z-50"
         animate={{
           backgroundColor: scrolled
-            ? "rgba(255, 255, 255, 1)"
-            : "rgba(255, 255, 255, 0)",
+            ? "var(--header-bg)"
+            : "var(--header-bg-zero)",
           backdropFilter: scrolled ? "blur(16px)" : "blur(0px)",
           borderBottomColor: scrolled
-            ? "rgba(0, 0, 0, 0.1)"
-            : "rgba(0, 0, 0, 0)",
+            ? "var(--header-border)"
+            : "var(--header-border-zero)",
         }}
         style={{ borderBottomWidth: 1, borderBottomStyle: "solid" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}

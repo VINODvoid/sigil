@@ -107,19 +107,19 @@ export function DashboardView() {
 
         {/* Structural Grid for Stats */}
         <SectionReveal delay={0.05}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-y border-border/40 divide-y md:divide-y-0 md:divide-x divide-border/40 mb-24">
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-y border-border/40 divide-x divide-y md:divide-y-0 divide-border/40 mb-16 md:mb-24">
             {[
               { label: "Total Issued", value: MOCK_PRINCIPAL.totalIssued, icon: Activity },
               { label: "Active Nodes", value: MOCK_PRINCIPAL.activeCount, icon: Shield },
               { label: "Revoked", value: MOCK_PRINCIPAL.revokedCount, icon: Clock },
               { label: "Total Exposure", value: "$4.2M", icon: Database },
             ].map((stat, i) => (
-              <div key={stat.label} className="p-8 lg:p-10 relative group overflow-hidden bg-background hover:bg-foreground/[0.01] transition-colors">
-                <stat.icon size={20} strokeWidth={1.5} className="text-foreground/40 absolute top-8 right-8" />
-                <div className="font-mono text-[3rem] lg:text-[4rem] font-light text-foreground tabular-nums leading-none tracking-tighter mb-4">
+              <div key={stat.label} className="p-6 md:p-8 lg:p-10 relative group overflow-hidden bg-background hover:bg-foreground/[0.01] transition-colors border-border/40">
+                <stat.icon size={16} strokeWidth={2} className="text-foreground/40 absolute top-6 right-6 md:top-8 md:right-8" />
+                <div className="font-mono text-[2rem] md:text-[3rem] lg:text-[4rem] font-light text-foreground tabular-nums leading-none tracking-tighter mb-4">
                   {stat.value}
                 </div>
-                <div className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground/60 uppercase">
+                <div className="font-mono text-[9px] md:text-[10px] tracking-[0.25em] text-muted-foreground/50 uppercase">
                   {stat.label}
                 </div>
               </div>
@@ -167,49 +167,59 @@ export function DashboardView() {
 
                     {/* Agent Info */}
                     <div className="col-span-1 lg:col-span-3 flex flex-col gap-1">
-                      <span className="font-mono text-[10px] text-muted-foreground/60 uppercase tracking-widest flex items-center gap-2">
+                      <div className="flex items-center gap-2 lg:hidden mb-1">
+                         <StatusIndicator status={sigil.status} />
+                         <span className="w-1 h-1 rounded-full bg-foreground/10" />
+                         <span className="font-mono text-[10px] text-muted-foreground/40 uppercase tracking-widest truncate">
+                            {sigil.id.slice(0, 12)}
+                         </span>
+                      </div>
+                      <span className="hidden lg:inline font-mono text-[10px] text-muted-foreground/40 uppercase tracking-widest flex items-center gap-2">
                         <Cpu size={10} className="text-foreground/30" />
                         {sigil.id.slice(0, 12)}
                       </span>
-                      <span className="font-medium text-[15px] text-foreground">
+                      <span className="font-medium text-[16px] text-foreground">
                         {sigil.agentName}
                       </span>
                     </div>
 
                     {/* Capabilities */}
                     <div className="col-span-1 lg:col-span-3 flex flex-wrap gap-1.5">
-                      {sigil.capabilities.slice(0, 3).map((cap) => (
+                      {sigil.capabilities.slice(0, 2).map((cap) => (
                         <CapabilityBadge key={cap} capability={cap} className="bg-transparent border-border/40" />
                       ))}
-                      {sigil.capabilities.length > 3 && (
+                      {sigil.capabilities.length > 2 && (
                         <span className="font-mono text-[9px] text-muted-foreground/40 px-2 py-0.5">
-                          +{sigil.capabilities.length - 3}
+                          +{sigil.capabilities.length - 2}
                         </span>
                       )}
                     </div>
 
                     {/* Spend Limit */}
-                    <div className="col-span-1 lg:col-span-3 pr-8 flex items-center gap-3">
+                    <div className="col-span-1 lg:col-span-3 lg:pr-8 flex items-center gap-3">
                        <Zap size={14} className={cn("text-amber-500/40", sigil.status !== 'active' && "grayscale opacity-30")} />
                        {sigil.status === "active" ? (
                          <div className="w-full max-w-[200px]">
                            <SpendBar spent={sigil.spentToday} limit={sigil.spendLimitPerDay} />
                          </div>
                        ) : (
-                         <span className="font-mono text-[11px] text-muted-foreground/40">—</span>
+                         <span className="font-mono text-[11px] text-muted-foreground/40">NO_ACTIVE_STREAM</span>
                        )}
                     </div>
 
-                    {/* Status */}
-                    <div className="col-span-1 lg:col-span-2">
+                    {/* Status (Hidden on Mobile, shown in info block) */}
+                    <div className="hidden lg:block col-span-1 lg:col-span-2">
                       <StatusIndicator status={sigil.status} />
                     </div>
 
                     {/* Rep & Action */}
-                    <div className="col-span-1 lg:col-span-1 flex items-center justify-between lg:justify-end gap-4">
-                       <span className="font-mono text-[14px] text-foreground tabular-nums">
-                         {sigil.reputation.toFixed(1)}
-                       </span>
+                    <div className="col-span-1 lg:col-span-1 flex items-center justify-between lg:justify-end gap-4 border-t lg:border-t-0 border-border/10 pt-4 lg:pt-0">
+                       <div className="flex flex-col lg:items-end">
+                          <span className="lg:hidden font-mono text-[9px] text-muted-foreground/40 uppercase tracking-widest mb-1">Reputation</span>
+                          <span className="font-mono text-[15px] text-foreground tabular-nums">
+                            {sigil.reputation.toFixed(1)}
+                          </span>
+                       </div>
                        <ArrowUpRight size={18} className="text-foreground/40 group-hover:text-foreground transition-colors" />
                     </div>
                   </div>

@@ -220,37 +220,37 @@ export function RegistryView() {
 
         {/* Command Palette Style Search */}
         <SectionReveal delay={0.04}>
-          <div className="flex flex-col md:flex-row gap-0 border border-border/40 bg-foreground/[0.01] mb-12 relative z-20 shadow-sm">
-            <div className="relative flex-1 group border-b md:border-b-0 md:border-r border-border/40">
-              <Search size={20} strokeWidth={2} className="absolute left-6 top-1/2 -translate-y-1/2 text-muted-foreground/60 group-focus-within:text-foreground transition-colors" />
+          <div className="flex flex-col lg:flex-row gap-0 border border-border/40 bg-foreground/[0.01] mb-12 relative z-20 shadow-sm">
+            <div className="relative flex-1 group border-b lg:border-b-0 lg:border-r border-border/40">
+              <Search size={18} strokeWidth={2} className="absolute left-6 top-1/2 -translate-y-1/2 text-muted-foreground/60 group-focus-within:text-foreground transition-colors" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Query nodes by signature, capability, or provider..."
-                className="w-full h-20 pl-16 pr-6 bg-transparent text-foreground text-[14px] font-mono placeholder:text-muted-foreground/40 focus:outline-none focus:bg-foreground/[0.02] transition-colors"
+                className="w-full h-16 md:h-20 pl-16 pr-6 bg-transparent text-foreground text-[13px] md:text-[14px] font-mono placeholder:text-muted-foreground/40 focus:outline-none focus:bg-foreground/[0.02] transition-colors"
               />
             </div>
-            <div className="flex">
+            <div className="flex divide-x divide-border/40">
               <button
                 onClick={() => setFiltersOpen(!filtersOpen)}
                 className={cn(
-                  "h-20 px-10 text-[11px] font-mono uppercase tracking-[0.2em] flex items-center gap-4 transition-colors border-r border-border/40",
+                  "flex-1 lg:flex-none h-16 md:h-20 px-6 md:px-10 text-[10px] md:text-[11px] font-mono uppercase tracking-[0.2em] flex items-center justify-center gap-3 transition-colors",
                   filtersOpen || hasFilters
                     ? "bg-foreground/5 text-foreground"
                     : "text-muted-foreground hover:text-foreground hover:bg-foreground/[0.02]"
                 )}
               >
-                <SlidersHorizontal size={18} strokeWidth={2} />
-                Parameters
+                <SlidersHorizontal size={16} strokeWidth={2} />
+                <span className="hidden sm:inline">Parameters</span>
                 {hasFilters && (
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 )}
               </button>
-              <div className="relative">
+              <div className="flex-1 lg:flex-none relative">
                 <select
                   value={sortKey}
                   onChange={(e) => setSortKey(e.target.value as SortKey)}
-                  className="h-20 pl-10 pr-14 bg-transparent text-foreground text-[11px] font-mono uppercase tracking-[0.2em] focus:outline-none hover:bg-foreground/[0.02] transition-colors appearance-none cursor-pointer font-bold"
+                  className="w-full h-16 md:h-20 pl-6 md:pl-10 pr-12 bg-transparent text-foreground text-[10px] md:text-[11px] font-mono uppercase tracking-[0.2em] focus:outline-none hover:bg-foreground/[0.02] transition-colors appearance-none cursor-pointer font-bold"
                 >
                   {SORT_OPTIONS.map((o) => (
                     <option key={o.value} value={o.value}>
@@ -259,7 +259,7 @@ export function RegistryView() {
                   ))}
                 </select>
                 <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-40">
-                  <X size={16} className="rotate-45" strokeWidth={2.5} />
+                  <X size={14} className="rotate-45" strokeWidth={2.5} />
                 </div>
               </div>
             </div>

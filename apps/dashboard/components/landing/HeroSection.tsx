@@ -55,12 +55,12 @@ export function HeroSection() {
     <section
       ref={containerRef}
       style={{ position: "relative" }}
-      className="min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center overflow-hidden snap-start"
     >
       {/* Text content */}
       <motion.div
         style={{ y: textY }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-20 pb-10 flex flex-col items-center text-center"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-12 pb-10 flex flex-col items-center text-center"
       >
         {/* Label */}
         <motion.div

@@ -117,8 +117,8 @@ function StepCard({ step, index }: { step: (typeof steps)[0]; index: number }) {
 
 export function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-28 md:py-36 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="how-it-works" className="min-h-screen flex items-center py-20 md:py-32 border-t border-border snap-start">
+      <div className="max-w-7xl mx-auto px-6 w-full">
         {/* Heading */}
         <div className="mb-20">
           <motion.span

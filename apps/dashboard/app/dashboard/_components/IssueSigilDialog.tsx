@@ -60,34 +60,34 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-2xl bg-background border-l border-border/40 shadow-2xl flex flex-col overflow-hidden"
+        className="relative w-full md:max-w-2xl bg-background border-l border-border/40 shadow-2xl flex flex-col overflow-hidden h-full"
       >
         {/* Technical Header */}
-        <div className="p-8 border-b border-border/40 flex items-start justify-between bg-foreground/[0.01]">
+        <div className="p-6 md:p-8 border-b border-border/40 flex items-start justify-between bg-foreground/[0.01]">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="px-2 py-0.5 border border-emerald-500/20 bg-emerald-500/5 rounded text-[9px] font-mono text-emerald-600 uppercase tracking-widest">
                 PRTCL_PROVISION_V2
               </div>
-              <span className="font-mono text-[10px] text-muted-foreground/30 uppercase tracking-[0.25em]">
+              <span className="hidden sm:inline font-mono text-[10px] text-muted-foreground/30 uppercase tracking-[0.25em]">
                 Secure Channel 01
               </span>
             </div>
-            <h2 className="hero-display text-[3.5rem] leading-[0.9] text-foreground tracking-tight">
+            <h2 className="hero-display text-[2.5rem] md:text-[3.5rem] leading-[0.9] text-foreground tracking-tight">
               Issue<br />
               <span className="italic text-muted-foreground/60">New Sigil.</span>
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="w-12 h-12 flex items-center justify-center rounded-full border border-border/40 hover:bg-foreground/5 transition-all group"
+            className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-border/40 hover:bg-foreground/5 transition-all group"
           >
             <X size={18} className="text-muted-foreground group-hover:text-foreground transition-colors" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto custom-scrollbar">
-          <div className="p-8 md:p-12 space-y-12">
+          <div className="p-6 md:p-12 space-y-10 md:space-y-12">
             
             {/* Step 1: Target Node */}
             <div className="space-y-6">
@@ -106,10 +106,10 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
                     type="text"
                     required
                     placeholder="ENTER SOLANA PUBLIC KEY..."
-                    className="w-full h-16 pl-12 pr-6 bg-foreground/[0.01] border border-border/40 text-foreground font-mono text-[13px] placeholder:text-muted-foreground/20 focus:outline-none focus:border-foreground/20 transition-all uppercase tracking-widest"
+                    className="w-full h-14 md:h-16 pl-12 pr-6 bg-foreground/[0.01] border border-border/40 text-foreground font-mono text-[12px] md:text-[13px] placeholder:text-muted-foreground/20 focus:outline-none focus:border-foreground/20 transition-all uppercase tracking-widest"
                   />
                 </div>
-                <p className="text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest px-1">
+                <p className="text-[9px] md:text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest px-1">
                   Agent must be registered in the global directory to receive credentials.
                 </p>
               </div>
@@ -223,16 +223,16 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
           </div>
 
           {/* Action Footer */}
-          <div className="p-8 md:p-12 pt-0 sticky bottom-0 bg-background/80 backdrop-blur-md">
+          <div className="p-6 md:p-12 pt-0 sticky bottom-0 bg-background/80 backdrop-blur-md">
             <Button
               type="submit"
               disabled={submitting || capabilities.length === 0}
-              className="w-full rounded-none h-16 bg-foreground text-background font-mono tracking-[0.3em] uppercase text-[13px] group relative overflow-hidden"
+              className="w-full rounded-none h-14 md:h-16 bg-foreground text-background font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase text-[12px] md:text-[13px] group relative overflow-hidden"
             >
               {submitting ? (
                  <div className="flex items-center gap-3">
                     <span className="w-1.5 h-1.5 bg-background rounded-full animate-ping" />
-                    <span>Signing Protocol...</span>
+                    <span>Signing...</span>
                  </div>
               ) : (
                 <div className="flex items-center gap-3">
@@ -241,8 +241,8 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
                 </div>
               )}
             </Button>
-            <p className="text-[9px] font-mono text-center text-muted-foreground/30 uppercase tracking-[0.2em] mt-6">
-               TRANSACTION_COST: 0.000005 SOL — ON_CHAIN_ID: SIGIL_7X...
+            <p className="text-[8px] md:text-[9px] font-mono text-center text-muted-foreground/30 uppercase tracking-[0.2em] mt-4 md:mt-6">
+               COST: 0.000005 SOL — ID: SIGIL_7X...
             </p>
           </div>
         </form>

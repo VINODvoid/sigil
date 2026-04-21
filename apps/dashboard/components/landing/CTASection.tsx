@@ -22,7 +22,7 @@ export function CTASection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-32 md:py-44 overflow-hidden border-t border-border"
+      className="relative min-h-screen flex items-center overflow-hidden border-t border-border snap-start"
     >
       {/* Animated dot grid background */}
       <motion.div

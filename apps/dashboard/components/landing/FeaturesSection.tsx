@@ -117,8 +117,8 @@ function FeatureCard({
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="py-28 md:py-36 border-t border-border">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="features" className="min-h-screen flex items-center py-20 md:py-32 border-t border-border snap-start">
+      <div className="max-w-7xl mx-auto px-6 w-full">
         <div className="mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div>
             <motion.span
