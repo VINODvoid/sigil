@@ -52,19 +52,13 @@ function ProblemSlide({
   const y = useTransform(
     smoothProgress,
     [rangeIn[0], rangeIn[1], rangeOut[0], rangeOut[1]],
-    [30, 0, 0, -30]
+    [20, 0, 0, -20]
   );
 
   const scale = useTransform(
     smoothProgress,
     [rangeIn[0], rangeIn[1], rangeOut[0], rangeOut[1]],
-    [0.985, 1, 1, 0.985]
-  );
-
-  const blur = useTransform(
-    smoothProgress,
-    [rangeIn[0], rangeIn[1], rangePeak[0], rangePeak[1], rangeOut[0], rangeOut[1]],
-    ["blur(10px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(0px)", "blur(10px)"]
+    [0.99, 1, 1, 0.99]
   );
 
   const numberOpacity = useTransform(
@@ -79,7 +73,6 @@ function ProblemSlide({
         opacity, 
         y, 
         scale,
-        filter: blur
       }}
       className="absolute inset-0 flex items-center justify-center px-6 md:px-16"
     >
@@ -143,27 +136,27 @@ export function ProblemSection() {
     offset: ["start start", "end end"],
   });
 
-  // Snappier spring for less "input lag"
+  // ULTRA FAST & RESPONSIVE SPRING
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 150,
-    damping: 35,
-    restDelta: 0.001
+    stiffness: 300,
+    damping: 40,
+    restDelta: 0.0001
   });
 
-  const introOpacity = useTransform(smoothProgress, [0, 0.08], [1, 0]);
-  const introY = useTransform(smoothProgress, [0, 0.08], [0, -20]);
+  const introOpacity = useTransform(smoothProgress, [0, 0.05], [1, 0]);
+  const introY = useTransform(smoothProgress, [0, 0.05], [0, -10]);
   const progressScaleX = useTransform(smoothProgress, [0, 1], [0, 1]);
 
-  // Adjusting ranges so the section "releases" faster at the end
+  // Fast, snapping ranges
   const ranges: Array<{
     in: [number, number];
     peak: [number, number];
     out: [number, number];
   }> = [
-    { in: [0.05, 0.15], peak: [0.15, 0.25], out: [0.25, 0.35] },
-    { in: [0.28, 0.38], peak: [0.38, 0.48], out: [0.48, 0.58] },
-    { in: [0.51, 0.61], peak: [0.61, 0.71], out: [0.71, 0.81] },
-    { in: [0.74, 0.84], peak: [0.84, 0.92], out: [0.92, 0.98] },
+    { in: [0.05, 0.12], peak: [0.12, 0.24], out: [0.24, 0.28] },
+    { in: [0.30, 0.37], peak: [0.37, 0.49], out: [0.49, 0.53] },
+    { in: [0.55, 0.62], peak: [0.62, 0.74], out: [0.74, 0.78] },
+    { in: [0.80, 0.87], peak: [0.87, 0.95], out: [0.95, 0.98] },
   ];
 
   return (
@@ -171,7 +164,7 @@ export function ProblemSection() {
       id="protocol"
       ref={containerRef}
       className="relative snap-start bg-background"
-      style={{ minHeight: "420vh" }}
+      style={{ minHeight: "300vh" }}
     >
       <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div style={{ scaleX: progressScaleX }} className="scroll-line" />
@@ -186,7 +179,7 @@ export function ProblemSection() {
               The problem
             </span>
             <span className="font-display italic text-[1.1rem] text-muted-foreground/50 hidden md:block">
-              Scroll to explore four compounding failures.
+              One scroll per failure.
             </span>
           </div>
         </motion.div>
@@ -214,7 +207,7 @@ export function ProblemSection() {
 
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
           <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/30 uppercase">
-            Sigil solves all four
+            Fast resolution
           </span>
         </div>
       </div>
