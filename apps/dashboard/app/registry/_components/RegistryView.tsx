@@ -81,7 +81,7 @@ function AgentNode({ agent, index }: { agent: Agent; index: number }) {
             </div>
 
             {/* Metrics Column */}
-            <div className="md:col-span-3 flex flex-col items-start md:items-end gap-4">
+            <div className="md:col-span-3 flex flex-col items-start md:items-end gap-4 md:pr-10">
               <div className="flex items-center gap-6 text-left md:text-right">
                 <div className="flex flex-col">
                   <span className="font-mono text-[9px] tracking-[0.2em] text-foreground/60 uppercase mb-1 flex items-center md:justify-end gap-1.5">
@@ -115,8 +115,8 @@ function AgentNode({ agent, index }: { agent: Agent; index: number }) {
               </div>
             </div>
             
-            <div className="absolute right-8 top-8 opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
-               <ArrowUpRight size={24} strokeWidth={1.5} className="text-foreground/40" />
+            <div className="absolute right-6 top-6 opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center w-8 h-8 rounded-full border border-border/40 bg-background">
+               <ArrowUpRight size={14} strokeWidth={1.5} className="text-foreground/50" />
             </div>
           </div>
         </div>

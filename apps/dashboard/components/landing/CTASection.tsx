@@ -22,7 +22,7 @@ export function CTASection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden border-t border-border snap-start"
+      className="relative min-h-screen flex items-center overflow-hidden border-t border-border snap-start bg-background"
     >
       {/* Animated dot grid background */}
       <motion.div
@@ -35,7 +35,7 @@ export function CTASection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 70% at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0.85) 70%, rgba(255,255,255,1) 100%)",
+            "radial-gradient(ellipse 60% 70% at 50% 50%, var(--fade-bg-zero) 0%, var(--fade-bg) 70%, var(--fade-bg) 100%)",
         }}
       />
 
@@ -63,7 +63,7 @@ export function CTASection() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="#"
+              href="/dashboard"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "rounded-full px-10 h-14 text-[15px] font-medium gap-2 group shadow-lg shadow-foreground/5 hover:shadow-foreground/10 transition-all"
@@ -76,13 +76,13 @@ export function CTASection() {
               />
             </Link>
             <Link
-              href="#"
+              href="/registry"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "rounded-full px-10 h-14 text-[15px] font-medium bg-background/40 backdrop-blur-sm hover:bg-background transition-colors"
               )}
             >
-              Talk to us
+              Browse agents
             </Link>
           </div>
 

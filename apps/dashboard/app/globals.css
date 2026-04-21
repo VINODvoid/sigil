@@ -53,6 +53,9 @@
   --foreground: oklch(0.12 0 0);
   --header-bg: rgba(255, 255, 255, 0.98);
   --header-bg-zero: rgba(255, 255, 255, 0);
+  --fade-bg: rgba(255, 255, 255, 1);
+  --fade-bg-zero: rgba(255, 255, 255, 0);
+  --dot-color: oklch(0.8 0 0 / 0.5);
   --header-border: rgba(0, 0, 0, 0.1);
   --header-border-zero: rgba(0, 0, 0, 0);
   --card: oklch(0.995 0 0);
@@ -87,6 +90,9 @@
   --foreground: oklch(0.98 0 0);
   --header-bg: rgba(25, 25, 25, 0.98);
   --header-bg-zero: rgba(25, 25, 25, 0);
+  --fade-bg: rgba(25, 25, 25, 1);
+  --fade-bg-zero: rgba(25, 25, 25, 0);
+  --dot-color: oklch(0.3 0 0 / 0.4);
   --header-border: rgba(255, 255, 255, 0.1);
   --header-border-zero: rgba(255, 255, 255, 0);
   --card: oklch(0.12 0 0);
@@ -133,7 +139,7 @@ body {
 
 /* ─── Dot grid (used in hero + pinned sections) ─── */
 .dot-grid {
-  background-image: radial-gradient(circle, oklch(0.80 0 0 / 0.5) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 

@@ -93,7 +93,7 @@ export function StatsSection() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
-    <section className="min-h-screen flex flex-col border-t border-border snap-start">
+    <section className="min-h-screen flex flex-col border-t border-border snap-start bg-background">
       <div
         ref={ref}
         className="flex-1 bg-foreground overflow-hidden flex flex-col justify-center"

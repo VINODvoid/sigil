@@ -131,7 +131,7 @@ const { authorized } = await sigil.verify({ agent, capability: "payments" });
 const agents = await sigil.registry.find({ capability: "image-generation", minReputation: 4.0 });`;
 
   return (
-    <section id="integrations" className="min-h-screen flex items-center py-24 border-t border-border snap-start">
+    <section id="integrations" className="min-h-screen flex items-center py-24 border-t border-border snap-start bg-background">
       <div className="max-w-7xl mx-auto px-6 w-full">
         <motion.div
           ref={headingRef}

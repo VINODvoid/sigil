@@ -170,7 +170,7 @@ export function ProblemSection() {
     <section
       id="protocol"
       ref={containerRef}
-      className="relative snap-start"
+      className="relative snap-start bg-background"
       style={{ minHeight: "420vh" }}
     >
       <div className="sticky top-0 h-screen overflow-hidden">

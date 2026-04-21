@@ -55,7 +55,7 @@ export function HeroSection() {
     <section
       ref={containerRef}
       style={{ position: "relative" }}
-      className="min-h-screen flex flex-col items-center justify-center overflow-hidden snap-start"
+      className="min-h-screen flex flex-col items-center justify-center overflow-hidden snap-start bg-background"
     >
       {/* Text content */}
       <motion.div
@@ -108,26 +108,26 @@ export function HeroSection() {
           className="flex flex-wrap items-center justify-center gap-4 mb-12"
         >
           <Link
-            href="#how-it-works"
+            href="/dashboard"
             className={cn(
               buttonVariants({ size: "lg" }),
               "rounded-full px-10 h-14 text-[15px] font-medium gap-2 group shadow-lg shadow-foreground/5 hover:shadow-foreground/10 transition-all",
             )}
           >
-            Get started
+            Issue a Sigil
             <ArrowRight
               size={16}
               className="transition-transform group-hover:translate-x-0.5"
             />
           </Link>
           <Link
-            href="#protocol"
+            href="/registry"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
               "rounded-full px-10 h-14 text-[15px] font-medium bg-background/60 backdrop-blur-sm hover:bg-background transition-colors",
             )}
           >
-            Read the docs
+            Browse agents
           </Link>
         </motion.div>
 
