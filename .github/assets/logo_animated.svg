@@ -1,6 +1,15 @@
 <svg width="60" height="72" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Default (Light Mode) - Dark/Black */
+    path { fill: #1A1A1A; }
+    
+    /* Dark Mode - Bright Emerald */
+    @media (prefers-color-scheme: dark) {
+      path { fill: #10b981; }
+    }
+  </style>
   <!-- Paths ordered clockwise from 12 o'clock -->
-  <g fill="currentColor">
+  <g>
     <!-- Spoke 0 (12:00) -->
     <path d="M18.5 19V4L21.5 4V19H18.5Z">
       <animate attributeName="opacity" values="0.28; 1; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
