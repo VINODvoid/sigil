@@ -9,6 +9,11 @@ import type {
 
 export const MOCK_PRINCIPAL: Principal = {
   walletAddress: "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+  name: "Cyberdyne Systems",
+  email: "ops@cyberdyne.io",
+  avatarUrl: "https://api.dicebear.com/7.x/shapes/svg?seed=sigil",
+  bio: "Leading the transition to autonomous agent infrastructure.",
+  company: "Cyberdyne Systems Corp",
   totalIssued: 10,
   activeCount: 6,
   revokedCount: 2,

@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
+import { WalletProvider } from "@/providers/WalletProvider";
+import { PrincipalProvider } from "@/providers/PrincipalProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -193,7 +195,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col relative bg-background text-foreground">{children}</body>
+      <body className="min-h-full flex flex-col relative bg-background text-foreground">
+        <WalletProvider>
+          <PrincipalProvider>
+            {children}
+          </PrincipalProvider>
+        </WalletProvider>
+      </body>
     </html>
   );
 }

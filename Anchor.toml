@@ -1,0 +1,19 @@
+[toolchain]
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+credential = "Eoxakhx7oq5oDsGLsjvNPUEw5E58yfWnNJ18weUtAbxh"
+registry = "RjfxSbr9KaHFHkW1txeuWQhtQtGtw8DZZLNhbyPGUdM"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "cargo test"
+
+[hooks]

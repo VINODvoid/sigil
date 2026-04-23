@@ -1,9 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X, ShieldCheck, Zap, Globe, Cpu, Clock, ChevronRight, Hash, Database } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion } from "framer-motion";
+import { X, ShieldCheck, Zap, Globe, Clock, ChevronRight, Database } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
+import { PublicKey } from "@solana/web3.js";
+import BN from "bn.js";
+import { SigilClient } from "@/lib/sigil/client";
 import type { CapabilityType } from "@/types";
 import { cn } from "@/lib/utils";
 
@@ -24,9 +28,15 @@ interface IssueSigilDialogProps {
 }
 
 export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) {
+  const wallet = useAnchorWallet();
+  const { connection } = useConnection();
   const [capabilities, setCapabilities] = useState<CapabilityType[]>([]);
   const [submitting, setSubmitting] = useState(false);
-  const [step, setStep] = useState(1);
+  const [error, setError] = useState<string | null>(null);
+  const agentRef = useRef<HTMLInputElement>(null);
+  const perTxRef = useRef<HTMLInputElement>(null);
+  const perDayRef = useRef<HTMLInputElement>(null);
+  const expiryRef = useRef<HTMLInputElement>(null);
 
   function toggleCapability(cap: CapabilityType) {
     setCapabilities((prev) =>
@@ -36,11 +46,41 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!wallet) { setError("Connect your wallet first"); return; }
+
+    const agentKey = agentRef.current?.value.trim();
+    const perTx = perTxRef.current?.value;
+    const perDay = perDayRef.current?.value;
+    const expiry = expiryRef.current?.value;
+
+    if (!agentKey || !perTx || !perDay || !expiry) return;
+
+    let agentPubkey: PublicKey;
+    try {
+      agentPubkey = new PublicKey(agentKey);
+    } catch {
+      setError("Invalid agent public key");
+      return;
+    }
+
     setSubmitting(true);
-    // Simulate protocol signing
-    await new Promise((r) => setTimeout(r, 2000));
-    setSubmitting(false);
-    onSuccess();
+    setError(null);
+    try {
+      const client = new SigilClient({ connection, wallet });
+      // convert USDC to micro-USDC (6 decimals)
+      const toMicro = (v: string) => new BN(Math.round(parseFloat(v) * 1_000_000));
+      await client.issueSigil({
+        agent: agentPubkey,
+        capabilities: capabilities.map((c) => ({ category: c, allowedDomains: [] })),
+        spendLimits: { perTx: toMicro(perTx), perDay: toMicro(perDay) },
+        expiresAt: Math.floor(new Date(expiry).getTime() / 1000),
+      });
+      onSuccess();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Transaction failed");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -103,6 +143,7 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
                       <Globe size={18} />
                    </div>
                    <input
+                    ref={agentRef}
                     type="text"
                     required
                     placeholder="ENTER SOLANA PUBLIC KEY..."
@@ -188,8 +229,26 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
                      <label className="font-mono text-[9px] tracking-[0.2em] text-muted-foreground/60 uppercase">Max / Transaction (USDC)</label>
                    </div>
                    <input
+                    ref={perTxRef}
                     type="number"
                     required
+                    step="0.01"
+                    min="0.01"
+                    placeholder="0.00"
+                    className="w-full h-12 px-4 bg-foreground/[0.01] border border-border/40 text-foreground font-mono text-[14px] focus:outline-none focus:border-foreground/20"
+                  />
+                </div>
+                <div className="space-y-2">
+                   <div className="flex items-center gap-2 mb-2">
+                     <Zap size={12} className="text-amber-500/40" />
+                     <label className="font-mono text-[9px] tracking-[0.2em] text-muted-foreground/60 uppercase">Max / Day (USDC)</label>
+                   </div>
+                   <input
+                    ref={perDayRef}
+                    type="number"
+                    required
+                    step="0.01"
+                    min="0.01"
                     placeholder="0.00"
                     className="w-full h-12 px-4 bg-foreground/[0.01] border border-border/40 text-foreground font-mono text-[14px] focus:outline-none focus:border-foreground/20"
                   />
@@ -200,6 +259,7 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
                      <label className="font-mono text-[9px] tracking-[0.2em] text-muted-foreground/60 uppercase">Node Expiry (UTC)</label>
                    </div>
                    <input
+                    ref={expiryRef}
                     type="date"
                     required
                     className="w-full h-12 px-4 bg-foreground/[0.01] border border-border/40 text-foreground font-mono text-[13px] focus:outline-none focus:border-foreground/20"
@@ -224,9 +284,14 @@ export function IssueSigilDialog({ onClose, onSuccess }: IssueSigilDialogProps) 
 
           {/* Action Footer */}
           <div className="p-6 md:p-12 pt-0 sticky bottom-0 bg-background/80 backdrop-blur-md">
+            {error && (
+              <p className="text-[10px] font-mono text-destructive uppercase tracking-widest mb-4 px-1">
+                {error}
+              </p>
+            )}
             <Button
               type="submit"
-              disabled={submitting || capabilities.length === 0}
+              disabled={submitting || capabilities.length === 0 || !wallet}
               className="w-full rounded-none h-14 md:h-16 bg-foreground text-background font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase text-[12px] md:text-[13px] group relative overflow-hidden"
             >
               {submitting ? (

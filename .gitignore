@@ -1,0 +1,23 @@
+# Solana / Anchor
+target/
+.anchor/
+*-keypair.json
+
+# Rust
+debug/
+Cargo.lock
+
+# Node
+node_modules/
+dist/
+.next/
+*.log
+package-lock.json
+bun.lockb
+
+# Environments
+.env
+.env.*
+
+# OS
+.DS_Store

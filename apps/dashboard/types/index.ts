@@ -66,6 +66,11 @@ export interface Transaction {
 
 export interface Principal {
   walletAddress: string;
+  name?: string;
+  email?: string;
+  avatarUrl?: string;
+  bio?: string;
+  company?: string;
   totalIssued: number;
   activeCount: number;
   revokedCount: number;

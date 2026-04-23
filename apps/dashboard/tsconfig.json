@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@sigil/sdk": ["../../packages/sdk/src/index.ts"]
     }
   },
   "include": [
