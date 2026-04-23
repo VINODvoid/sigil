@@ -16,7 +16,7 @@ function Toast({ message, onDone }: { message: string; onDone: () => void }) {
       initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       exit={{ opacity: 0, y: 10, filter: "blur(4px)" }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
       onAnimationComplete={() => setTimeout(onDone, 2500)}
       className="fixed bottom-10 right-10 z-50 bg-foreground text-background text-[11px] font-mono tracking-widest uppercase px-6 py-4 rounded-none border border-foreground/10 shadow-2xl flex items-center gap-4"
     >

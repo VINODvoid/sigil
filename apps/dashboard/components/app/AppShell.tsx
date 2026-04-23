@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SigilLogo } from "@/components/landing/SigilLogo";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -57,9 +58,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     setScrolled(y > 40);
   });
 
-  const menuVariants = {
-    closed: { opacity: 0, y: -12, transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] } },
-    open: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } }
+  const menuVariants: Variants = {
+    closed: { opacity: 0, y: -12, transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] as const } },
+    open: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const } }
   };
 
   return (
