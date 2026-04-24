@@ -1,0 +1,23 @@
+<svg width="400" height="400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="emeraldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+  
+  <!-- The Infinity Path -->
+  <path d="M30 50 C 30 35, 45 35, 50 50 C 55 65, 70 65, 70 50 C 70 35, 55 35, 50 50 C 45 65, 30 65, 30 50" 
+        stroke="url(#emeraldGradient)" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        fill="none" />
+        
+  <!-- The Arrow Head -->
+  <path d="M47 43 L 53 50 L 47 57" 
+        stroke="#10b981" 
+        stroke-width="3" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+</svg>
