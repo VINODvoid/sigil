@@ -1,46 +1,37 @@
-<svg width="60" height="72" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    /* Default (Light Mode) - Dark/Black */
-    path { fill: #1A1A1A; }
-    
-    /* Dark Mode - Bright Emerald */
-    @media (prefers-color-scheme: dark) {
-      path { fill: #10b981; }
-    }
-  </style>
-  <!-- Paths ordered clockwise from 12 o'clock -->
+<svg width="400" height="400" viewBox="-30 -26 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="-30" y="-26" width="100" height="100" fill="#0a0a0a" />
   <g>
     <!-- Spoke 0 (12:00) -->
-    <path d="M18.5 19V4L21.5 4V19H18.5Z">
-      <animate attributeName="opacity" values="0.28; 1; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M18.5 19V4L21.5 4V19H18.5Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="0.28; 1; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
     <!-- Spoke 1 -->
-    <path d="M22.4754 19.404L33.082 8.79736L35.2034 10.9187L26.7181 19.404L22.4754 19.404Z">
-      <animate attributeName="opacity" values="0.28; 0.28; 1; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M22.4754 19.404L33.082 8.79736L35.2034 10.9187L26.7181 19.404L22.4754 19.404Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="0.28; 0.28; 1; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
     <!-- Spoke 2 (3:00) -->
-    <path d="M18.5 22.5L40 22.5V25.5L18.5 25.5V22.5Z">
-      <animate attributeName="opacity" values="0.28; 0.28; 0.28; 1; 0.28; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M18.5 22.5L40 22.5V25.5L18.5 25.5V22.5Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="0.28; 0.28; 0.28; 1; 0.28; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
     <!-- Spoke 3 -->
-    <path d="M26.7178 28.5963L35.2031 37.0815L33.0818 39.2029L22.4752 28.5963H26.7178Z">
-      <animate attributeName="opacity" values="0.28; 0.28; 0.28; 0.28; 1; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M26.7178 28.5963L35.2031 37.0815L33.0818 39.2029L22.4752 28.5963H26.7178Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="0.28; 0.28; 0.28; 0.28; 1; 0.28; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
     <!-- Spoke 4 (6:00) -->
-    <path d="M18.5 44V29H21.5V44H18.5Z">
-      <animate attributeName="opacity" values="0.28; 0.28; 0.28; 0.28; 0.28; 1; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M18.5 44V29H21.5V44H18.5Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="0.28; 0.28; 0.28; 0.28; 0.28; 1; 0.28; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
     <!-- Spoke 5 -->
-    <path d="M4.79776 37.0816L15.4044 26.475L17.5257 28.5964L6.91908 39.203L4.79776 37.0816Z">
-      <animate attributeName="opacity" values="0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 1; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M4.79776 37.0816L15.4044 26.475L17.5257 28.5964L6.91908 39.203L4.79776 37.0816Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 1; 0.28; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
     <!-- Spoke 6 (9:00) -->
-    <path d="M2.62269e-07 22.5L15 22.5V25.5L0 25.5L2.62269e-07 22.5Z">
-      <animate attributeName="opacity" values="0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 1; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M2.62269e-07 22.5L15 22.5V25.5L0 25.5L2.62269e-07 22.5Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 1; 0.28" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
     <!-- Spoke 7 -->
-    <path d="M6.91885 8.79727L17.5255 19.4039L15.4041 21.5252L4.79753 10.9186L6.91885 8.79727Z">
-      <animate attributeName="opacity" values="1; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 1" dur="4s" repeatCount="indefinite" begin="0s" calcMode="linear"/>
+    <path d="M6.91885 8.79727L17.5255 19.4039L15.4041 21.5252L4.79753 10.9186L6.91885 8.79727Z" fill="#10b981">
+      <animate attributeName="fill-opacity" values="1; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 0.28; 1" dur="4s" repeatCount="indefinite" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"/>
     </path>
   </g>
 </svg>

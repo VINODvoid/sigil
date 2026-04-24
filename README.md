@@ -115,7 +115,7 @@ graph TD
 
 ```bash
 # 1. Clone & Install
-git clone https://github.com/sigil-protocol/sigil && cd sigil
+git clone https://github.com/sigil-xyz/sigil && cd sigil
 bun install
 
 # 2. Configure Solana

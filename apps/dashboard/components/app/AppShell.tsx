@@ -65,22 +65,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden">
-      {/* Demo Mode Banner */}
-      {!connected && (
-        <div className="bg-amber-50/50 border-b border-amber-200/50 py-2 relative z-[60]">
-          <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-center gap-3">
-            <ShieldAlert size={12} className="text-amber-600" />
-            <span className="font-mono text-[9px] tracking-[0.1em] text-amber-700 uppercase font-medium text-center">
-              Demo Mode — Connect wallet to view your actual agent nodes
-            </span>
-          </div>
-        </div>
-      )}
-
       <motion.header
         className="fixed top-0 left-0 right-0 z-50 border-b border-transparent"
         animate={{
-          top: !connected ? 32 : 0,
           backgroundColor: scrolled
             ? "var(--header-bg)"
             : "var(--header-bg-zero)",
@@ -129,6 +116,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
           {/* Desktop Actions */}
           <div className="flex items-center gap-3 relative z-10">
+            {!connected && (
+              <div className="hidden sm:flex items-center gap-2 rounded-full border border-amber-300/50 bg-amber-50/80 px-3 py-2 text-amber-700 shadow-sm">
+                <ShieldAlert size={13} className="shrink-0" />
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] leading-none">
+                  Demo active
+                </span>
+              </div>
+            )}
+
             <div className="hidden lg:flex items-center">
               {connected ? (
                 <div className="relative">
@@ -231,11 +227,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             animate="open"
             exit="closed"
             className="fixed inset-0 z-40 lg:hidden flex flex-col"
-            style={{ top: !connected ? 84 + 32 : 84 }}
+            style={{ top: 84 }}
           >
             <div className="absolute inset-0 bg-background/96 backdrop-blur-xl border-b border-border shadow-2xl" />
             
             <nav className="relative z-10 max-w-7xl mx-auto w-full px-8 py-10 flex flex-col gap-1 flex-1">
+              {!connected && (
+                <div className="mb-5 flex items-center gap-2 rounded-full border border-amber-300/50 bg-amber-50/80 px-3 py-2 text-amber-700 w-fit">
+                  <ShieldAlert size={13} className="shrink-0" />
+                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] leading-none">
+                    Demo mode active
+                  </span>
+                </div>
+              )}
+
               {navLinks.map((link, i) => {
                 const active = pathname === link.href || pathname.startsWith(link.href + "/");
                 return (

@@ -10,10 +10,10 @@ const links = {
     { label: "Reputation", href: "#features" },
   ],
   Developers: [
-    { label: "Documentation", href: "https://github.com/sigil-protocol/sigil", external: true },
-    { label: "SDK reference", href: "https://github.com/sigil-protocol/sigil/tree/main/packages/sdk", external: true },
-    { label: "GitHub", href: "https://github.com/sigil-protocol/sigil", external: true },
-    { label: "Changelog", href: "https://github.com/sigil-protocol/sigil/releases", external: true },
+    { label: "Documentation", href: "https://github.com/sigil-xyz/sigil", external: true },
+    { label: "SDK reference", href: "https://github.com/sigil-xyz/sigil/tree/main/packages/sdk", external: true },
+    { label: "GitHub", href: "https://github.com/sigil-xyz/sigil", external: true },
+    { label: "Changelog", href: "https://github.com/sigil-xyz/sigil/releases", external: true },
   ],
   Company: [
     { label: "About", href: "#protocol" },
@@ -79,7 +79,7 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <Link
-              href="https://github.com/sigil-protocol/sigil"
+              href="https://github.com/sigil-xyz/sigil"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground/50 hover:text-foreground transition-colors"

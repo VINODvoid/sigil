@@ -18,7 +18,7 @@ const navLinks = [
   { href: "#features", label: "Features" },
   { href: "#integrations", label: "Integrations" },
   {
-    href: "https://github.com/sigil-protocol/sigil",
+    href: "https://github.com/sigil-xyz/sigil",
     label: "Docs",
     external: true,
   },
@@ -148,7 +148,7 @@ export function Navbar() {
             <div className="hidden sm:flex items-center gap-4">
               {/* GitHub */}
               <Link
-                href="https://github.com/VINODvoid/sigil"
+                href="https://github.com/sigil-xyz/sigil"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 text-foreground/30 hover:text-foreground transition-colors"

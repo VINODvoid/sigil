@@ -73,7 +73,7 @@ Verify these before finalizing:
 - [ ] sigil.ai (premium but desirable)
 - [ ] usesigil.com (backup)
 - [ ] @sigilprotocol on X/Twitter
-- [ ] @sigil on GitHub (likely taken — backup: sigil-protocol)
+- [ ] @sigil on GitHub (likely taken — backup: sigil-xyz)
 - [ ] CoinGecko search for existing "Sigil" token (avoid collision)
 - [ ] Solana mainnet: search for deployed "Sigil" program
 
@@ -120,7 +120,7 @@ Backup names (pre-vetted semantic fit):
 | sigilprotocol.com | ⚠️ TBD | Likely $12/yr |
 | sigil.ai | ⚠️ TBD | Could be $1K+ |
 | @sigilprotocol X | ⚠️ TBD | Free if available |
-| sigil-protocol GH | ⚠️ TBD | Free |
+| sigil-xyz GH | ⚠️ TBD | Free |
 
 ---
 

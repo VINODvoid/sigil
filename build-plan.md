@@ -11,9 +11,9 @@
 ### Must do before writing any code
 
 - [ ] Register project on arena.colosseum.org — reserve "Sigil"
-- [ ] Create public GitHub repo: `sigil-protocol/sigil`
+- [ ] Create public GitHub repo: `sigil-xyz/sigil`
 - [ ] Create project accounts:
-  - [ ] GitHub org: `sigil-protocol`
+  - [ ] GitHub org: `sigil-xyz`
   - [ ] Twitter/X: `@sigilprotocol` or `@sigilxyz`
   - [ ] Domain: check sigil.xyz / sigilprotocol.com
 - [ ] Join Colosseum Discord
