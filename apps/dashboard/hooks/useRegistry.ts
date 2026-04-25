@@ -39,6 +39,7 @@ export function useRegistry(options: DiscoverOptions = {}) {
   }, [connection]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetch();
   }, [fetch]);
 

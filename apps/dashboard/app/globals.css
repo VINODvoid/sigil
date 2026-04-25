@@ -55,7 +55,7 @@
   --header-bg-zero: rgba(255, 255, 255, 0);
   --fade-bg: rgba(255, 255, 255, 1);
   --fade-bg-zero: rgba(255, 255, 255, 0);
-  --dot-color: oklch(0.8 0 0 / 0.5);
+  --dot-color: oklch(0.5 0 0 / 0.15);
   --header-border: rgba(0, 0, 0, 0.1);
   --header-border-zero: rgba(0, 0, 0, 0);
   --card: oklch(0.995 0 0);
@@ -102,10 +102,29 @@ body {
   margin-bottom: -0.25em;
 }
 
-/* ─── Dot grid (used in hero + pinned sections) ─── */
+/* ─── Cinematic Background Patterns ─── */
 .dot-grid {
   background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
   background-size: 28px 28px;
+}
+
+.sigil-ripple {
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 0%, transparent 20%, oklch(0.5 0 0 / 0.03) 20.5%, transparent 21%),
+    radial-gradient(circle at 50% 50%, transparent 0%, transparent 40%, oklch(0.5 0 0 / 0.03) 40.5%, transparent 41%),
+    radial-gradient(circle at 50% 50%, transparent 0%, transparent 60%, oklch(0.5 0 0 / 0.03) 60.5%, transparent 61%),
+    radial-gradient(circle at 50% 50%, transparent 0%, transparent 80%, oklch(0.5 0 0 / 0.03) 80.5%, transparent 81%);
+  background-size: 100% 100%;
+}
+
+.zen-ripples {
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 150px, oklch(0.5 0 0 / 0.02) 151px, transparent 152px),
+    radial-gradient(circle at 50% 50%, transparent 300px, oklch(0.5 0 0 / 0.02) 301px, transparent 302px),
+    radial-gradient(circle at 50% 50%, transparent 450px, oklch(0.5 0 0 / 0.02) 451px, transparent 452px),
+    radial-gradient(circle at 50% 50%, transparent 600px, oklch(0.5 0 0 / 0.02) 601px, transparent 602px),
+    radial-gradient(circle at 50% 50%, transparent 750px, oklch(0.5 0 0 / 0.02) 751px, transparent 752px),
+    radial-gradient(circle at 50% 50%, transparent 900px, oklch(0.5 0 0 / 0.02) 901px, transparent 902px);
 }
 
 /* ─── Marquee ─── */

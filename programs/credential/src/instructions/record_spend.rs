@@ -24,11 +24,11 @@ pub fn handler(ctx: Context<RecordSpend>, amount: u64) -> Result<()> {
     let clock = Clock::get()?;
 
     require!(!sigil.revoked, SigilError::Revoked);
+    require!(clock.unix_timestamp < sigil.expires_at, SigilError::Expired);
     require!(
-        clock.unix_timestamp < sigil.expires_at,
-        SigilError::Expired
+        amount <= sigil.spend_limit_per_tx,
+        SigilError::ExceedsPerTxLimit
     );
-    require!(amount <= sigil.spend_limit_per_tx, SigilError::ExceedsPerTxLimit);
 
     // reset daily counter if a new day has started
     if clock.unix_timestamp - sigil.last_reset >= SECONDS_PER_DAY {
@@ -37,7 +37,10 @@ pub fn handler(ctx: Context<RecordSpend>, amount: u64) -> Result<()> {
     }
 
     let new_spent = sigil.spent_today.checked_add(amount).unwrap();
-    require!(new_spent <= sigil.spend_limit_per_day, SigilError::ExceedsDailyLimit);
+    require!(
+        new_spent <= sigil.spend_limit_per_day,
+        SigilError::ExceedsDailyLimit
+    );
 
     sigil.spent_today = new_spent;
 

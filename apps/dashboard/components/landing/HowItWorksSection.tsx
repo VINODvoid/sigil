@@ -5,6 +5,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { CopyButton } from "@/components/landing/CopyButton";
+import { LineReveal } from "@/components/landing/LineReveal";
 
 const steps = [
   {
@@ -41,30 +42,6 @@ const steps = [
 }))`,
   },
 ];
-
-function LineReveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  return (
-    <span className={`line-reveal-parent ${className}`}>
-      <motion.span
-        initial={{ y: "105%", rotate: 1.5 }}
-        whileInView={{ y: "0%", rotate: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] }}
-        className="inline-block"
-      >
-        {children}
-      </motion.span>
-    </span>
-  );
-}
 
 function highlightCode(code: string) {
   return code

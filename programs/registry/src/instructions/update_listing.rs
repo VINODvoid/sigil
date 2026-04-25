@@ -26,7 +26,11 @@ pub struct UpdateListing<'info> {
 pub fn handler(ctx: Context<UpdateListing>, params: UpdateListingParams) -> Result<()> {
     let listing = &mut ctx.accounts.listing;
 
-    require_keys_eq!(listing.agent, ctx.accounts.agent.key(), RegistryError::Unauthorized);
+    require_keys_eq!(
+        listing.agent,
+        ctx.accounts.agent.key(),
+        RegistryError::Unauthorized
+    );
     require!(
         params.capabilities.len() <= AgentListing::MAX_CAPABILITIES,
         RegistryError::TooManyCapabilities

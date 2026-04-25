@@ -32,7 +32,7 @@ impl AgentListing {
         + 8   // successful_transactions
         + 8   // last_active
         + 1   // active
-        + 1;  // bump
+        + 1; // bump
 }
 
 #[derive(AnchorSerialize, AnchorDeserialize, Clone)]

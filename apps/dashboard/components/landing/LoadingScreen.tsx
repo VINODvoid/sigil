@@ -19,10 +19,7 @@ const LOG_MESSAGES = [
 export function LoadingScreen() {
   const [loading, setLoading] = useState(true);
   const [percent, setPercent] = useState(0);
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
     const timer = setTimeout(() => setLoading(false), 3200);
 
     const progressInterval = setInterval(() => {
