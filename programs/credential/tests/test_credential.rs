@@ -1,6 +1,6 @@
 use {
     anchor_lang::{
-        solana_program::instruction::Instruction, AnchorSerialize, InstructionData, ToAccountMetas,
+        solana_program::instruction::Instruction, InstructionData, ToAccountMetas,
     },
     litesvm::LiteSVM,
     solana_keypair::Keypair,
