@@ -1,10 +1,9 @@
 "use client";
 
-"use client";
-
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { CopyButton } from "@/components/landing/CopyButton";
+import { LineReveal } from "@/components/landing/LineReveal";
 
 const integrations = [
   {
@@ -134,28 +133,42 @@ const { authorized } = await sigil.verify({ agent, capability: "payments" });
 const agents = await sigil.registry.find({ capability: "image-generation", minReputation: 4.0 });`;
 
   return (
-    <section id="integrations" className="min-h-screen flex items-center py-24 border-t border-border snap-start bg-background">
-      <div className="max-w-7xl mx-auto px-6 w-full">
-        <motion.div
-          ref={headingRef}
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-20"
-        >
-          <span className="font-mono text-[11px] tracking-[0.25em] text-muted-foreground/60 uppercase">
+    <section id="integrations" className="relative min-h-screen flex items-center py-24 border-t border-border snap-start bg-background overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-blue-500/[0.03] blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
+        <div className="text-center mb-16 md:mb-24">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="font-mono text-[10px] md:text-[11px] tracking-[0.25em] text-muted-foreground/50 uppercase block mb-6"
+          >
             Integrations
-          </span>
-          <h2 className="font-display text-[clamp(2rem,4vw,3.2rem)] italic leading-tight text-foreground mt-5">
-            Built on the protocols that matter.
+          </motion.span>
+          
+          <h2 className="hero-display text-[clamp(2rem,5vw,5rem)] text-foreground leading-[1.1]">
+            <LineReveal delay={0.1}>Built on the protocols</LineReveal>
+            <br />
+            <LineReveal delay={0.25} className="italic">
+              that matter.
+            </LineReveal>
           </h2>
-          <p className="text-[1.05rem] text-muted-foreground mt-6 max-w-lg mx-auto leading-relaxed">
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-[1rem] md:text-[1.1rem] text-muted-foreground mt-8 max-w-lg mx-auto leading-relaxed px-4"
+          >
             Sigil is composable by design. Drop it into your existing stack with
             a single middleware call.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-5">
           {integrations.map((integration, i) => (
             <IntegrationCard
               key={integration.name}
@@ -165,35 +178,35 @@ const agents = await sigil.registry.find({ capability: "image-generation", minRe
           ))}
         </div>
 
-        {/* SDK preview */}
+        {/* SDK preview - Improved mobile layout */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 p-10 border border-border/60 rounded-3xl bg-secondary/50 backdrop-blur-sm"
+          className="mt-12 md:mt-16 p-6 md:p-10 border border-border/60 rounded-2xl md:rounded-3xl bg-secondary/30 backdrop-blur-md"
         >
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
             <div className="flex items-center gap-3">
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-border" />
                 <div className="w-2.5 h-2.5 rounded-full bg-border" />
                 <div className="w-2.5 h-2.5 rounded-full bg-border" />
               </div>
-              <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground/60 uppercase ml-2">
+              <span className="font-mono text-[9px] md:text-[10px] tracking-[0.2em] text-muted-foreground/60 uppercase ml-2">
                 SDK · TypeScript
               </span>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-[10px] text-muted-foreground/80 bg-background/50 border border-border/50 rounded-full px-3 py-1">
+            <div className="flex items-center justify-between sm:justify-end gap-3">
+              <span className="font-mono text-[9px] md:text-[10px] text-muted-foreground/80 bg-background/50 border border-border/50 rounded-full px-3 py-1">
                 @sigil/sdk
               </span>
               <CopyButton text={sdkCode} />
             </div>
           </div>
-          <div className="font-mono text-[12px] text-foreground/80 leading-relaxed overflow-x-auto">
+          <div className="font-mono text-[11px] md:text-[12px] text-foreground/80 leading-relaxed overflow-x-auto pb-2 custom-scrollbar">
             <div
-              className="whitespace-pre"
+              className="whitespace-pre min-w-[500px] lg:min-w-0"
               dangerouslySetInnerHTML={{ __html: highlightCode(sdkCode) }}
             />
           </div>

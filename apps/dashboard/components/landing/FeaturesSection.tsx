@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { LineReveal } from "@/components/landing/LineReveal";
 import {
   KeyRound,
   ScanLine,
@@ -50,30 +51,6 @@ const features = [
   },
 ];
 
-function LineReveal({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  return (
-    <span className={`line-reveal-parent ${className}`}>
-      <motion.span
-        initial={{ y: "105%" }}
-        whileInView={{ y: "0%" }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-        className="inline-block"
-      >
-        {children}
-      </motion.span>
-    </span>
-  );
-}
-
 function FeatureCard({
   feature,
   index,
@@ -94,20 +71,20 @@ function FeatureCard({
         ease: [0.16, 1, 0.3, 1],
       }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className="group flex flex-col gap-5 p-7 border border-border rounded-2xl bg-card hover:border-foreground/15 hover:shadow-[0_12px_48px_rgba(0,0,0,0.07)] transition-colors duration-300 cursor-default"
+      className="group flex flex-col gap-6 p-8 md:p-10 border border-border/60 rounded-[2rem] bg-card hover:border-foreground/15 hover:shadow-[0_12px_48px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-default"
     >
-      <div className="w-10 h-10 rounded-xl border border-border flex items-center justify-center group-hover:bg-foreground group-hover:border-foreground transition-all duration-300">
+      <div className="w-10 h-10 rounded-full border border-border/80 flex items-center justify-center bg-secondary/50 group-hover:bg-foreground group-hover:border-foreground transition-all duration-300">
         <Icon
           size={16}
           strokeWidth={1.5}
-          className="text-foreground/60 group-hover:text-background transition-colors duration-300"
+          className="text-foreground/70 group-hover:text-background transition-colors duration-300"
         />
       </div>
       <div>
-        <h3 className="font-semibold text-[15px] text-foreground mb-2">
+        <h3 className="font-semibold text-[15px] md:text-[16px] text-foreground mb-3 tracking-tight">
           {feature.title}
         </h3>
-        <p className="text-[0.84rem] text-muted-foreground leading-relaxed">
+        <p className="text-[0.9rem] text-muted-foreground leading-relaxed">
           {feature.description}
         </p>
       </div>
@@ -117,20 +94,24 @@ function FeatureCard({
 
 export function FeaturesSection() {
   return (
-    <section id="features" className="min-h-screen flex items-center py-20 md:py-32 border-t border-border snap-start bg-background">
-      <div className="max-w-7xl mx-auto px-6 w-full">
-        <div className="mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          <div>
+    <section id="features" className="relative min-h-screen flex items-center py-20 md:py-32 border-t border-border snap-start bg-background overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 zen-ripples opacity-[0.4] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-emerald-500/[0.02] blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative z-10">
+        <div className="mb-20 md:mb-28 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 md:gap-16">
+          <div className="max-w-2xl">
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground/50 uppercase"
+              className="font-mono text-[10px] md:text-[11px] tracking-[0.25em] text-muted-foreground/50 uppercase block mb-8"
             >
               Capabilities
             </motion.span>
-            <h2 className="hero-display text-[clamp(3rem,5.5vw,5.5rem)] text-foreground mt-5">
+            <h2 className="hero-display text-[clamp(3.5rem,6vw,6rem)] text-foreground leading-[0.9] tracking-tighter">
               <LineReveal delay={0.05} className="block">
                 Everything
               </LineReveal>
@@ -144,14 +125,14 @@ export function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[0.9rem] text-muted-foreground leading-relaxed max-w-[360px] pb-2"
+            className="text-[1.1rem] text-muted-foreground leading-relaxed max-w-[420px] lg:pb-3"
           >
             A complete identity stack for the agent economy. Issue, verify,
             enforce, and build — all composable, all on-chain.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, i) => (
             <FeatureCard key={feature.title} feature={feature} index={i} />
           ))}

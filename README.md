@@ -1,11 +1,16 @@
 <div align="center">
-  <img src=".github/assets/logo_animated.svg" width="80" height="96" alt="Sigil Logo" />
+  <a href="https://sigil-protocol-mu.vercel.app">
+    <img src=".github/assets/logo_animated.svg" width="80" height="96" alt="Sigil Logo" />
+  </a>
 
   <h1>Sigil</h1>
 
   <p><strong>Cryptographic identity and trust layer for the AI agent economy.</strong></p>
 
   <p>
+    <a href="https://sigil-protocol-mu.vercel.app">
+      <img src="https://img.shields.io/badge/Dashboard-Live-brightgreen?style=flat" alt="Dashboard" />
+    </a>
     <a href="https://github.com/sigil-xyz/sigil/actions/workflows/ci.yml">
       <img src="https://github.com/sigil-xyz/sigil/actions/workflows/ci.yml/badge.svg" alt="CI" />
     </a>
