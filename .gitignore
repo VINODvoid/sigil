@@ -4,8 +4,7 @@ target/
 *-keypair.json
 
 # Rust
-debug/
-Cargo.lock
+# Cargo.lock is committed — binary workspace requires reproducible builds
 
 # Node
 node_modules/
@@ -17,7 +16,10 @@ bun.lockb
 
 # Environments
 .env
-.env.*
+.env.local
+.env.*.local
+!.env.example
 
 # OS
 .DS_Store
+Thumbs.db

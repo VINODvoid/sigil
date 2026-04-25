@@ -1,0 +1,8 @@
+# Default owner for all files
+* @VINODvoid
+
+# Anchor programs — require explicit review
+/programs/ @VINODvoid
+
+# Published packages
+/packages/ @VINODvoid

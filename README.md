@@ -1,65 +1,52 @@
 <div align="center">
-  <a href="https://sigil.protocol">
-    <img src=".github/assets/logo_animated.svg" width="80" height="96" alt="Sigil Logo" />
-  </a>
+  <img src=".github/assets/logo_animated.svg" width="80" height="96" alt="Sigil Logo" />
 
-  <h1 align="center">sigil</h1>
+  <h1>Sigil</h1>
 
-  <p align="center">
-    <strong>Cryptographic identity and trust layer for the AI agent economy.</strong>
+  <p><strong>Cryptographic identity and trust layer for the AI agent economy.</strong></p>
+
+  <p>
+    <a href="https://github.com/sigil-xyz/sigil/actions/workflows/ci.yml">
+      <img src="https://github.com/sigil-xyz/sigil/actions/workflows/ci.yml/badge.svg" alt="CI" />
+    </a>
+    <img src="https://img.shields.io/badge/Solana-Devnet-9945FF?style=flat&logo=solana&logoColor=white" alt="Network" />
+    <img src="https://img.shields.io/badge/License-MIT-blue?style=flat" alt="License" />
+    <img src="https://img.shields.io/badge/status-alpha-orange?style=flat" alt="Status" />
   </p>
-
-  <p align="center">
-    <a href="https://arena.colosseum.org"><img src="https://img.shields.io/badge/Colosseum%20Frontier-2026-000000?style=for-the-badge" alt="Hackathon" /></a>
-    <a href="https://solana.com"><img src="https://img.shields.io/badge/Solana-Devnet-000000?style=for-the-badge&logo=solana" alt="Network" /></a>
-    <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-000000?style=for-the-badge" alt="License" /></a>
-  </p>
-</div>
-
-<br />
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center" style="border: none;">
-        <p>Before AI agents can pay each other, they need to <strong>trust</strong> each other.<br />
-        Sigil provides the identity, authorization, and discovery layer for autonomous agents on Solana.</p>
-      </td>
-    </tr>
-  </table>
 </div>
 
 ---
 
-## ⚡ The Primitive
+AI agents can already pay each other. What they cannot do is **trust** each other.
 
-AI agents can now pay each other via **x402**. The payment rails exist. But there is a missing primitive: **KYA (Know Your Agent)**. Without it, the agent economy is limited by a vacuum of trust and discovery.
+Sigil is the identity, authorization, and discovery layer that makes the AI agent economy possible. It gives every agent a cryptographically verifiable credential — linking it to an owner, constraining what it can do, and staking collateral against misbehavior.
 
-| Problem | The Sigil Solution |
+---
+
+## The Problem
+
+| Problem | Impact |
 | :--- | :--- |
-| **Identity Crisis** | Cryptographic proof of principal (owner) linked to the agent's wallet. |
-| **Discovery Vacuum** | An on-chain registry for agents to list capabilities, pricing, and endpoints. |
-| **Reputation Void** | Deterministic reputation scores built from verified transaction receipts. |
-| **Liability Gap** | Staked collateral that can be slashed in case of misbehavior or failure. |
-
-> *"The critical missing primitive is KYA: Know Your Agent. Agents need cryptographically signed credentials linking them to their principal, constraints, and liability."*
-> — **a16z crypto**, 2026 Thesis
+| **No identity** | Any agent can claim to be anything. There is no way to verify ownership or authorization. |
+| **No discovery** | There is no standard directory for agents to advertise capabilities and get found. |
+| **No reputation** | Transaction history is opaque. Agents have no way to build or verify track records. |
+| **No accountability** | When an agent misbehaves or fails, there is nothing at stake. |
 
 ---
 
-## 🛠️ How It Works
+## How It Works
 
-Sigil consists of three core components that form a complete trust stack.
+Sigil is built on three on-chain primitives.
 
 ### 1. Sigil Credentials
-Every agent holds a **Sigil**: a signed credential stored as a PDA on Solana. It encodes who owns the agent, what it can do, and its spend limits.
+
+Every agent holds a **Sigil** — a PDA on Solana that encodes its owner (principal), what capabilities it has, and what it is allowed to spend.
 
 ```typescript
 import { SigilClient } from '@sigil/sdk';
 
 const client = new SigilClient({ cluster: 'devnet' });
 
-// Principal issues a Sigil to their agent
 const sigil = await client.issueSigil({
   agent: agentKeypair.publicKey,
   capabilities: [{ category: 'image-generation' }],
@@ -68,8 +55,9 @@ const sigil = await client.issueSigil({
 }, principalSigner);
 ```
 
-### 2. Sigil Registry
-A public on-chain directory where agents list their services. Other agents can discover them based on capability, price, and reputation.
+### 2. Agent Registry
+
+A public on-chain directory. Agents list their services; other agents discover them by capability, price, and reputation.
 
 ```typescript
 const agents = await client.discover({
@@ -80,80 +68,106 @@ const agents = await client.discover({
 ```
 
 ### 3. Reputation Engine
-Every transaction creates an on-chain receipt. Successes build reputation; disputes or failures can lead to slashing and permanent score hits.
+
+Every transaction produces an on-chain receipt. Successes build reputation scores; disputes can trigger stake slashing.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-```mermaid
-graph TD
-    P[Principal / Owner] -- issues --> S[Sigil Credential]
-    A[AI Agent] -- holds --> S
-    S -- limits --> W[Agent Wallet]
-    A -- listed in --> R[Sigil Registry]
-    R -- tracks --> RE[Reputation Engine]
-    W -- pays via --> X[x402 Payment]
-    X -- settles on --> SOL[Solana]
+```
+Principal ──issues──► Sigil Credential
+                            │
+                   Agent holds Sigil
+                            │
+              ┌─────────────┼─────────────┐
+              ▼             ▼             ▼
+       Agent Registry   Spend Limits   Attestations
+              │
+       Reputation Engine
+              │
+       x402 Payment (Solana USDC)
 ```
 
 ---
 
-## 📦 Ecosystem
+## Packages
 
 | Package | Description | Status |
 | :--- | :--- | :--- |
-| **`@sigil/sdk`** | TypeScript client for program interaction | ⬜ Planned |
-| **`@sigil/x402`** | Express middleware for Sigil-gated endpoints | ⬜ Planned |
-| **`@sigil/mcp`** | MCP server plugin for agent verification | ⬜ Planned |
+| `@sigil/sdk` | TypeScript client for all program interactions | Alpha |
+| `@sigil/x402` | Express middleware for Sigil-gated agent endpoints | Planned |
+| `@sigil/mcp` | MCP server plugin for agent verification | Planned |
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-**Prerequisites:** [Anchor CLI](https://www.anchor-lang.com/docs/installation), [Bun](https://bun.sh)
+**Prerequisites:** [Rust](https://rustup.rs), [Anchor CLI](https://www.anchor-lang.com/docs/installation), [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools), [Bun](https://bun.sh)
 
 ```bash
-# 1. Clone & Install
 git clone https://github.com/sigil-xyz/sigil && cd sigil
-bun install
 
-# 2. Configure Solana
+# Configure Solana
 solana config set --url devnet
 solana airdrop 2
 
-# 3. Build & Test
+# Build Anchor programs
 anchor build
-anchor test
 
-# 4. Launch Dashboard
+# Run tests
+cargo test
+
+# Run dashboard
 cd apps/dashboard
-bun dev
+cp .env.example .env.local
+# Fill in .env.local with your Helius RPC URL, program IDs, and Privy app ID
+bun install && bun dev
 ```
 
 ---
 
-## 🛠️ Build Status
+## Repository Structure
+
+```
+sigil/
+├── programs/
+│   ├── credential/        # issue_sigil, revoke_sigil, record_spend
+│   ├── registry/          # list_agent, update_listing, discover
+│   └── reputation/        # create_receipt, submit_rating
+├── packages/
+│   ├── sdk/               # @sigil/sdk
+│   ├── x402-middleware/   # @sigil/x402
+│   └── mcp-plugin/        # @sigil/mcp
+├── apps/
+│   └── dashboard/         # Next.js 15 principal dashboard
+├── Anchor.toml
+└── package.json
+```
+
+---
+
+## Build Status
 
 | Component | Status |
 | :--- | :--- |
-| **Landing Page & Dashboard** | ✅ Complete |
-| **On-chain Credential Program** | 🔄 In Progress |
-| **Registry & Reputation Programs** | ⬜ Planned |
-| **SDK & Middleware** | ⬜ Planned |
+| Dashboard (Next.js 15) | Complete — mock data |
+| Credential Program | In progress |
+| Registry Program | Planned |
+| Reputation Program | Planned |
+| SDK (`@sigil/sdk`) | Planned |
+| x402 Middleware | Planned |
 
 ---
 
-## 💎 Why This Wins
+## Contributing
 
-1. **Strategic Gap:** a16z explicitly identified KYA as the critical missing piece for 2026.
-2. **First Mover:** Sigil is the first trust layer built specifically for the MoonPay OWS / x402 era.
-3. **Infrastructure First:** History shows that primitives (like Unruggable or Reflect) win Grand Champions.
-4. **Network Effects:** As more agents require Sigils, the registry becomes the default discovery engine for the agentic web.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup, branch conventions, and the PR process.
 
----
+## Security
 
-<div align="center">
-  <p>Built for the <strong>Colosseum Frontier Hackathon</strong> · 2026</p>
-  <p><i>Every agent needs a Sigil.</i></p>
-</div>
+See [SECURITY.md](./SECURITY.md) for the vulnerability disclosure policy.
+
+## License
+
+[MIT](./LICENSE)

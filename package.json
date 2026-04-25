@@ -1,11 +1,16 @@
 {
-  "license": "ISC",
+  "name": "sigil",
+  "version": "0.1.0",
+  "description": "Cryptographic identity and trust layer for the AI agent economy",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
-    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
-  },
-  "dependencies": {
-    "@anchor-lang/core": "^1.0.0"
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w"
   },
   "devDependencies": {
     "chai": "^4.3.4",
@@ -16,5 +21,8 @@
     "@types/mocha": "^9.0.0",
     "typescript": "^5.7.3",
     "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "@anchor-lang/core": "^1.0.0"
   }
 }
