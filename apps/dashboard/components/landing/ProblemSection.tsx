@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 
 const problems = [
   {
@@ -32,77 +32,122 @@ const problems = [
 
 function ProblemSlide({
   problem,
+  index,
+  total,
   smoothProgress,
-  rangeIn,
-  rangePeak,
-  rangeOut,
 }: {
   problem: (typeof problems)[0];
-  smoothProgress: any;
-  rangeIn: [number, number];
-  rangePeak: [number, number];
-  rangeOut: [number, number];
+  index: number;
+  total: number;
+  smoothProgress: MotionValue<number>;
 }) {
-  const opacity = useTransform(
-    smoothProgress,
-    [rangeIn[0], rangeIn[1], rangePeak[0], rangePeak[1], rangeOut[0], rangeOut[1]],
-    [0, 1, 1, 1, 1, 0]
-  );
-  
+  const step = 1 / total;
+  const enterStart = index * step;
+  const enterEnd = index * step + step * 0.5;
+  const leaveStart = (index + 1) * step;
+
+  // 3D Stacking: Subtle rotation and cleaner vertical compression
   const y = useTransform(
     smoothProgress,
-    [rangeIn[0], rangeIn[1], rangeOut[0], rangeOut[1]],
-    [20, 0, 0, -20]
+    [enterStart - 0.1, enterStart, enterEnd, leaveStart, leaveStart + 0.1],
+    [
+      index === 0 ? 0 : 1000, 
+      index === 0 ? 0 : 1000, 
+      0, 
+      0, 
+      -40
+    ]
+  );
+
+  const rotateX = useTransform(
+    smoothProgress,
+    [enterStart - 0.1, enterStart, enterEnd, leaveStart],
+    [index === 0 ? 0 : 15, index === 0 ? 0 : 15, 0, 0]
   );
 
   const scale = useTransform(
     smoothProgress,
-    [rangeIn[0], rangeIn[1], rangeOut[0], rangeOut[1]],
-    [0.99, 1, 1, 0.99]
+    [enterStart - 0.1, enterStart, enterEnd, leaveStart, 1],
+    [
+      index === 0 ? 1 : 0.9, 
+      index === 0 ? 1 : 0.9, 
+      1, 
+      1, 
+      0.92 - (total - 1 - index) * 0.02
+    ]
   );
 
-  const numberOpacity = useTransform(
+  const opacity = useTransform(
     smoothProgress,
-    [rangeIn[0], rangeIn[1]],
-    [0, 1]
+    [enterStart - 0.1, enterStart, enterEnd, leaveStart, 1],
+    [
+      index === 0 ? 1 : 0, 
+      index === 0 ? 1 : 0, 
+      1, 
+      1, 
+      0.4 + (index / total) * 0.6
+    ]
+  );
+
+  // Parallax effect for internal content
+  const contentY = useTransform(
+    smoothProgress,
+    [enterStart, enterEnd, leaveStart, leaveStart + 0.1],
+    [40, 0, 0, -20]
+  );
+
+  // Opacity for the internal content to reduce noise when covered
+  const contentOpacity = useTransform(
+    smoothProgress,
+    [leaveStart, leaveStart + 0.1],
+    [1, 0]
   );
 
   return (
     <motion.div
       style={{ 
-        opacity, 
-        y, 
+        y,
         scale,
+        opacity,
+        rotateX,
+        zIndex: index,
+        perspective: 1000,
       }}
-      className="absolute inset-0 flex items-center justify-center px-6 md:px-16"
+      className="absolute inset-0 flex items-center justify-center px-4 md:px-12 pointer-events-none"
     >
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-24 items-end">
-        <div>
-          {/* Number */}
-          <motion.div
-            style={{ opacity: numberOpacity }}
-            className="font-mono text-[11px] tracking-[0.25em] text-muted-foreground/70 uppercase mb-8"
-          >
-            {problem.number} — {problem.aside}
-          </motion.div>
+      <div className="relative w-full max-w-5xl h-[60vh] md:h-[65vh] flex flex-col justify-center rounded-[3rem] border border-black/[0.08] bg-zinc-50 shadow-[0_40px_120px_rgba(0,0,0,0.06)] overflow-hidden p-8 md:p-16 lg:p-24 pointer-events-auto">
+        {/* Subtle glossy overlay */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-black/[0.01] via-transparent to-white/[0.05] pointer-events-none" />
+        
+        <motion.div 
+          style={{ y: contentY, opacity: contentOpacity }}
+          className="relative grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center"
+        >
+          <div>
+            {/* Number Label */}
+            <div className="font-mono text-[10px] tracking-[0.4em] text-muted-foreground uppercase mb-12 flex items-center gap-4">
+              <span className="w-12 h-[1px] bg-black/10" />
+              {problem.number} / {problem.aside}
+            </div>
 
-          {/* Title — enormous Cormorant */}
-          <h2 className="hero-display text-[clamp(4.2rem,8.5vw,9.5rem)] text-foreground mb-10 whitespace-pre-line tracking-tight leading-[0.9]">
-            {problem.title}
-          </h2>
+            {/* Title */}
+            <h2 className="hero-display text-[clamp(2.5rem,6vw,6.5rem)] text-foreground mb-8 whitespace-pre-line tracking-tight leading-[0.95]">
+              {problem.title}
+            </h2>
 
-          {/* Body */}
-          <p className="text-[1.15rem] text-muted-foreground leading-relaxed max-w-[620px]">
-            {problem.body}
-          </p>
-        </div>
+            {/* Body */}
+            <p className="text-[1rem] md:text-[1.1rem] text-muted-foreground/90 leading-relaxed max-w-[480px] font-light">
+              {problem.body}
+            </p>
+          </div>
 
-        {/* Large number watermark */}
-        <div className="hidden lg:block">
-          <span className="font-display font-light text-[15rem] leading-none text-foreground/[0.06] select-none tabular-nums">
-            {problem.number}
-          </span>
-        </div>
+          {/* Large number watermark */}
+          <div className="hidden lg:flex justify-end opacity-20">
+            <span className="font-display font-light text-[20rem] leading-none text-black/[0.03] select-none tabular-nums tracking-tighter">
+              {problem.number}
+            </span>
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -110,20 +155,33 @@ function ProblemSlide({
 
 function ProgressDot({
   smoothProgress,
-  range,
+  index,
+  total,
 }: {
-  smoothProgress: any;
-  range: { in: [number, number]; peak: [number, number]; out: [number, number] };
+  smoothProgress: MotionValue<number>;
+  index: number;
+  total: number;
 }) {
+  const step = 1 / total;
+  const start = index * step;
+  const end = (index + 1) * step;
+  
   const opacity = useTransform(
     smoothProgress,
-    [range.in[0], range.peak[0], range.peak[1], range.out[1]],
-    [0.2, 1, 1, 0.2]
+    [start - 0.05, start, end, end + 0.05],
+    [0.15, 1, 1, 0.15]
   );
+  
+  const scale = useTransform(
+    smoothProgress,
+    [start - 0.05, start, end, end + 0.05],
+    [1, 1.3, 1.3, 1]
+  );
+
   return (
     <motion.div
-      style={{ opacity }}
-      className="w-1 h-1 rounded-full bg-foreground"
+      style={{ opacity, scale }}
+      className="w-1.5 h-1.5 rounded-full bg-foreground"
     />
   );
 }
@@ -136,10 +194,10 @@ export function ProblemSection() {
     offset: ["start start", "end end"],
   });
 
-  // ULTRA FAST & RESPONSIVE SPRING
+  // LUXURY SMOOTH SPRING - Slightly more responsive
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 300,
-    damping: 40,
+    stiffness: 100,
+    damping: 30,
     restDelta: 0.0001
   });
 
@@ -147,39 +205,32 @@ export function ProblemSection() {
   const introY = useTransform(smoothProgress, [0, 0.05], [0, -10]);
   const progressScaleX = useTransform(smoothProgress, [0, 1], [0, 1]);
 
-  // Fast, snapping ranges
-  const ranges: Array<{
-    in: [number, number];
-    peak: [number, number];
-    out: [number, number];
-  }> = [
-    { in: [0.05, 0.12], peak: [0.12, 0.24], out: [0.24, 0.28] },
-    { in: [0.30, 0.37], peak: [0.37, 0.49], out: [0.49, 0.53] },
-    { in: [0.55, 0.62], peak: [0.62, 0.74], out: [0.74, 0.78] },
-    { in: [0.80, 0.87], peak: [0.87, 0.95], out: [0.95, 0.98] },
-  ];
-
   return (
     <section
       id="protocol"
       ref={containerRef}
-      className="relative snap-start bg-background"
-      style={{ minHeight: "300vh" }}
+      className="relative bg-background"
+      style={{ minHeight: "350vh" }}
     >
       <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div style={{ scaleX: progressScaleX }} className="scroll-line" />
-        <div className="absolute inset-0 dot-grid opacity-[0.15] pointer-events-none" />
+        <div className="absolute inset-0 dot-grid opacity-[0.25] pointer-events-none" />
 
         <motion.div
           style={{ opacity: introOpacity, y: introY }}
-          className="absolute top-0 left-0 right-0 flex items-end px-6 md:px-16 pt-24 pb-8"
+          className="absolute top-0 left-0 right-0 flex items-end px-6 md:px-16 pt-24 pb-8 z-50"
         >
-          <div className="flex items-end justify-between w-full max-w-6xl mx-auto">
-            <span className="font-mono text-[11px] tracking-[0.22em] text-muted-foreground/50 uppercase">
-              The problem
-            </span>
-            <span className="font-display italic text-[1.1rem] text-muted-foreground/50 hidden md:block">
-              One scroll per failure.
+          <div className="flex items-end justify-between w-full max-w-6xl mx-auto border-b border-black/[0.03] pb-8">
+            <div className="flex flex-col gap-1">
+              <span className="font-mono text-[9px] tracking-[0.3em] text-muted-foreground uppercase">
+                The protocol
+              </span>
+              <span className="font-display text-[1.2rem] text-foreground tracking-tight">
+                Addressing fundamental agentic failures.
+              </span>
+            </div>
+            <span className="font-mono text-[9px] tracking-[0.3em] text-muted-foreground/40 uppercase hidden md:block">
+              Section 02 — Critical Gaps
             </span>
           </div>
         </motion.div>
@@ -190,25 +241,32 @@ export function ProblemSection() {
               <ProblemSlide
                 key={problem.number}
                 problem={problem}
+                index={i}
+                total={problems.length}
                 smoothProgress={smoothProgress}
-                rangeIn={ranges[i].in}
-                rangePeak={ranges[i].peak}
-                rangeOut={ranges[i].out}
               />
             ))}
           </div>
         </div>
 
-        <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 flex flex-col gap-3">
-          {ranges.map((r, i) => (
-            <ProgressDot key={i} smoothProgress={smoothProgress} range={r} />
+        <div className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-50">
+          {problems.map((_, i) => (
+            <ProgressDot 
+              key={i} 
+              smoothProgress={smoothProgress} 
+              index={i} 
+              total={problems.length} 
+            />
           ))}
         </div>
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-          <span className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground/30 uppercase">
-            Fast resolution
-          </span>
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-50">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-[1px] h-12 bg-gradient-to-b from-black/0 via-black/10 to-black/0" />
+            <span className="font-mono text-[9px] tracking-[0.4em] text-muted-foreground/30 uppercase">
+              Scroll to discover
+            </span>
+          </div>
         </div>
       </div>
     </section>
