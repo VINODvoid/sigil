@@ -158,7 +158,7 @@ export function RegistryView() {
   }
 
   const filtered = useMemo(() => {
-    let agents = MOCK_AGENTS.filter((a) => {
+    const agents = MOCK_AGENTS.filter((a) => {
       if (query && !a.name.toLowerCase().includes(query.toLowerCase()) &&
           !a.description.toLowerCase().includes(query.toLowerCase())) return false;
       if (selectedCaps.size > 0 && !a.capabilities.some((c) => selectedCaps.has(c))) return false;

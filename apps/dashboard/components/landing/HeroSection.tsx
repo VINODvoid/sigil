@@ -84,7 +84,7 @@ export function HeroSection() {
           className="text-[1rem] md:text-[1.15rem] text-foreground/70 leading-relaxed max-w-[580px] mb-8 md:mb-12 font-medium px-4"
         >
           AI agents can now transact autonomously. But without identity,
-          authorization, and accountability — anyone claiming to be "your agent"
+          authorization, and accountability — anyone claiming to be &ldquo;your agent&rdquo;
           could be anyone. Sigil fixes that.
         </motion.p>
 

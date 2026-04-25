@@ -27,7 +27,7 @@ impl Sigil {
         + 8   // issued_at
         + 8   // expires_at
         + 1   // revoked
-        + 1;  // bump
+        + 1; // bump
 
     pub const MAX_CAPABILITIES: usize = 10;
     // category(32) + domains vec prefix(4) + max 5 domains * 64 bytes each

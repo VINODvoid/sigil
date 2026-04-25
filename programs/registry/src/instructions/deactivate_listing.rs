@@ -19,7 +19,11 @@ pub struct DeactivateListing<'info> {
 pub fn handler(ctx: Context<DeactivateListing>) -> Result<()> {
     let listing = &mut ctx.accounts.listing;
 
-    require_keys_eq!(listing.agent, ctx.accounts.agent.key(), RegistryError::Unauthorized);
+    require_keys_eq!(
+        listing.agent,
+        ctx.accounts.agent.key(),
+        RegistryError::Unauthorized
+    );
     require!(listing.active, RegistryError::AlreadyInactive);
 
     listing.active = false;

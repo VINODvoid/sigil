@@ -140,15 +140,15 @@ export class SigilClient {
   // offset: 8 discriminator + 32 agent_pubkey = 40
   async getSigilsByPrincipal(principal: PublicKey): Promise<SigilAccount[]> {
     const PRINCIPAL_OFFSET = 40;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const all = await this.cp.account["sigil"].all([
+    type RawEntry = { publicKey: PublicKey; account: Record<string, unknown> };
+    const all = (await this.cp.account["sigil"].all([
       {
         memcmp: {
           offset: PRINCIPAL_OFFSET,
           bytes: principal.toBase58(),
         },
       },
-    ]) as any[];
+    ])) as RawEntry[];
 
     return all.map(({ publicKey, account }) => ({
       pda: publicKey,
